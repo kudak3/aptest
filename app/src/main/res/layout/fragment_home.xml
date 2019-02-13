@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Home">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <Button
+        android:id="@+id/syllabus1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/button_border"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="81dp"
+        android:text="IGCSE" />
+
+    <Button
+        android:id="@+id/syllabus2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/button_border"
+        android:layout_marginTop="81dp"
+        android:layout_marginEnd="68dp"
+        android:text="BGCSE" />
+</RelativeLayout>
