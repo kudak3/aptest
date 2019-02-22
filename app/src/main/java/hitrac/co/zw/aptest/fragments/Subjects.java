@@ -1,6 +1,7 @@
 package hitrac.co.zw.aptest.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
 
 public class Subjects extends Fragment {
@@ -71,7 +73,10 @@ public class Subjects extends Fragment {
         subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(), "clicked"+" " + (i+1)+" "+subjectList.get(i), Toast.LENGTH_SHORT).show();
+               if(i==0){
+                   Intent intent= new Intent(getActivity(), Questions.class);
+                   startActivity(intent);
+               }
             }
         });
 

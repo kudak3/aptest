@@ -109,15 +109,14 @@ public class Login extends Fragment {
                     password.setError("Enter password");
                 }
                 else {
-//                    login();
+                    login();
 //                    Fragment fragment= new Home();
 //                    FragmentManager fragmentManager= getFragmentManager();
 //                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
 //                    fragmentTransaction.replace(R.id.fragment_container,fragment);
 //                    fragmentTransaction.commit();
 //                    fragmentTransaction.addToBackStack(null);
-                    Intent intent= new Intent(getActivity(), Questions.class);
-                    startActivity(intent);
+
                     Toast.makeText(getActivity(), "login successfully!",
                             Toast.LENGTH_LONG).show();
 
@@ -170,7 +169,7 @@ public class Login extends Fragment {
     }
     private void login() {
 
-        client.addInterceptor(new Interceptor(userName.getText().toString().trim(), password.getText().toString().trim()));
+        client.addInterceptor(new Interceptor(userName.getText().toString(), password.getText().toString()));
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -183,15 +182,32 @@ public class Login extends Fragment {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+
                if("userExists".equals(response.headers().get("Responded"))){
+
+                   if("student".equals(response.headers().get("Role"))){
                    Fragment fragment= new Home();
                    FragmentManager fragmentManager= getFragmentManager();
                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                    fragmentTransaction.replace(R.id.fragment_container,fragment);
                    fragmentTransaction.commit();
                    fragmentTransaction.addToBackStack(null);
+
                    Toast.makeText(getActivity(), "login successfully!",
                            Toast.LENGTH_LONG).show();
+               }
+
+               else{
+                       Fragment fragment= new TeacherHome();
+                       FragmentManager fragmentManager= getFragmentManager();
+                       FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                       fragmentTransaction.replace(R.id.fragment_container,fragment);
+                       fragmentTransaction.commit();
+                       fragmentTransaction.addToBackStack(null);
+
+                       Toast.makeText(getActivity(), "login successfully!",
+                               Toast.LENGTH_LONG).show();
+                   }
                }
                else{
 

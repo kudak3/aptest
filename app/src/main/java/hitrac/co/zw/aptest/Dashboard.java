@@ -21,9 +21,10 @@ import hitrac.co.zw.aptest.fragments.Home;
 import hitrac.co.zw.aptest.fragments.Login;
 import hitrac.co.zw.aptest.fragments.Results;
 import hitrac.co.zw.aptest.fragments.Subjects;
+import hitrac.co.zw.aptest.fragments.TeacherHome;
 
 public class Dashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Subjects.OnFragmentInteractionListener, Results.OnFragmentInteractionListener,Home.OnFragmentInteractionListener, Login.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Subjects.OnFragmentInteractionListener, TeacherHome.OnFragmentInteractionListener, Results.OnFragmentInteractionListener,Home.OnFragmentInteractionListener, Login.OnFragmentInteractionListener {
 
     public static MenuItem loginmenuItem, toolbarName;
     NavigationView navigationView;
