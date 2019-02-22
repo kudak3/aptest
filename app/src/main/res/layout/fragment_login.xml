@@ -1,42 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Login">
+    tools:context=".fragments.Login"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp"
+    android:background="@drawable/background">
 
     <!-- TODO: Update blank fragment layout -->
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--will put logo-->
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/logo"
+            />
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:padding="@dimen/padding"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Username"
+            android:textColorHint="#fff"
+            android:drawablePadding="12dp"
+            android:drawableLeft="@drawable/ic_action_account"
+
+            android:maxLines="1"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9d7db" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:textColorHint="#fff"
+            android:maxLines="1"
+            android:drawablePadding="12dp"
+            android:drawableLeft="@drawable/ic_action_password"
+
+           />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9d7db" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="Remember me"
+            android:layout_marginTop="@dimen/padding"
+            android:padding="@dimen/padding"/>
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="Log in"
+            android:textAllCaps="false"
+            android:padding="16dp"
+            android:background="@drawable/login_button"
+            android:textColor="#ff0000"
+            android:clickable="true"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textColor="#ffffff"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:padding="16dp"
+            android:background="@drawable/signup_button"
 
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="166dp"
-        android:text="Login" />
+            />
 
-    <EditText
-        android:id="@+id/userName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="129dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="enter username" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="205dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="enter password" />
+    </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
