@@ -29,4 +29,15 @@
         android:layout_marginTop="81dp"
         android:layout_marginEnd="68dp"
         android:text="BGCSE" />
+
+    <Button
+        android:id="@+id/syllabus3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:padding="10dp"
+        android:background="@drawable/button_border"
+        android:text="Driving Theory" />
 </RelativeLayout>

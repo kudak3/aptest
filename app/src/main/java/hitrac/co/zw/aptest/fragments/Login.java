@@ -7,14 +7,32 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import hitrac.co.zw.aptest.Dashboard;
+import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
+import hitrac.co.zw.aptest.configuration.ApiInterface;
+import hitrac.co.zw.aptest.configuration.Interceptor;
+import hitrac.co.zw.aptest.model.User;
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +48,9 @@ public class Login extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
    public Button loginBtn;
+   public static EditText userName,password;
+    public static OkHttpClient.Builder client = new OkHttpClient.Builder();
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -61,10 +82,10 @@ public class Login extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        client.addInterceptor(loggingInterceptor);
+
     }
 
     @Override
@@ -74,22 +95,40 @@ public class Login extends Fragment {
         View rootView= inflater.inflate(R.layout.fragment_login, container, false);
 
         loginBtn=(Button)rootView.findViewById(R.id.loginBtn);
+
+        userName=(EditText)rootView.findViewById(R.id.userName);
+        password=(EditText)rootView.findViewById(R.id.password);
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Fragment fragment= new Home();
-                FragmentManager fragmentManager= getFragmentManager();
-                FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container,fragment);
-                fragmentTransaction.commit();
-                fragmentTransaction.addToBackStack(null);
-                Toast.makeText(getActivity(), "login successfully!",
-                        Toast.LENGTH_LONG).show();
-            }
+
+                if(userName.getText().toString().length()==0){
+                    userName.setError("Enter username first");
+                }else  if(password.getText().toString().length()==0){
+                    password.setError("Enter password");
+                }
+                else {
+//                    login();
+//                    Fragment fragment= new Home();
+//                    FragmentManager fragmentManager= getFragmentManager();
+//                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragment_container,fragment);
+//                    fragmentTransaction.commit();
+//                    fragmentTransaction.addToBackStack(null);
+                    Intent intent= new Intent(getActivity(), Questions.class);
+                    startActivity(intent);
+                    Toast.makeText(getActivity(), "login successfully!",
+                            Toast.LENGTH_LONG).show();
+
+
+
+            }}
         });
 
         return  rootView;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -129,4 +168,49 @@ public class Login extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    private void login() {
+
+        client.addInterceptor(new Interceptor(userName.getText().toString().trim(), password.getText().toString().trim()));
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(client.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiInterface requestService = retrofit.create(ApiInterface.class);
+        Call<User> call = requestService.login(userName.getText().toString(),password.getText().toString());
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+               if("userExists".equals(response.headers().get("Responded"))){
+                   Fragment fragment= new Home();
+                   FragmentManager fragmentManager= getFragmentManager();
+                   FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                   fragmentTransaction.replace(R.id.fragment_container,fragment);
+                   fragmentTransaction.commit();
+                   fragmentTransaction.addToBackStack(null);
+                   Toast.makeText(getActivity(), "login successfully!",
+                           Toast.LENGTH_LONG).show();
+               }
+               else{
+
+                   Toast.makeText(getActivity(), "login failed!",
+                           Toast.LENGTH_LONG).show();
+               }
+
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable throwable) {
+                Log.d("onFailure", throwable.toString());
+
+                Toast.makeText(getActivity(), "Login failed. Please check your internet connecion.", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+    }
 }
+
+
+

@@ -20,12 +20,14 @@ import android.view.MenuItem;
 import hitrac.co.zw.aptest.fragments.Home;
 import hitrac.co.zw.aptest.fragments.Login;
 import hitrac.co.zw.aptest.fragments.Results;
+import hitrac.co.zw.aptest.fragments.Subjects;
 
 public class Dashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,Results.OnFragmentInteractionListener,Home.OnFragmentInteractionListener, Login.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Subjects.OnFragmentInteractionListener, Results.OnFragmentInteractionListener,Home.OnFragmentInteractionListener, Login.OnFragmentInteractionListener {
 
-    public static MenuItem loginmenuItem;
+    public static MenuItem loginmenuItem, toolbarName;
     NavigationView navigationView;
+
 
 
     @Override
@@ -35,9 +37,15 @@ public class Dashboard extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         loginmenuItem = menu.findItem(R.id.login);
+        Fragment fragment= new Login();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,8 +69,10 @@ public class Dashboard extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.dashboard, menu);
+
+        toolbarName=menu.findItem(R.id.toolbarName);
         return true;
     }
 
