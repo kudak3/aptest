@@ -3,20 +3,26 @@ package hitrac.co.zw.aptest.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import hitrac.co.zw.aptest.Dashboard;
 import hitrac.co.zw.aptest.R;
 
 
 import static hitrac.co.zw.aptest.Dashboard.loginmenuItem;
+import static hitrac.co.zw.aptest.Dashboard.profile;
+import static hitrac.co.zw.aptest.Dashboard.results;
 import static hitrac.co.zw.aptest.Dashboard.toolbarName;
+import static hitrac.co.zw.aptest.fragments.Login.isLogged;
 import static hitrac.co.zw.aptest.fragments.Login.userName;
 
 
@@ -65,9 +71,13 @@ public class Home extends Fragment {
         syllabus1=(Button)rootView.findViewById(R.id.syllabus1);
         syllabus2=(Button)rootView.findViewById(R.id.syllabus2);
         loginmenuItem.setTitle("Logout");
-        toolbarName.setTitle(userName.getText().toString());
-        toolbarName.setVisible(true);
+        results.setTitle("My Results");
+        profile.setTitle("My Profile");
 
+        if(isLogged) {
+            toolbarName.setTitle(userName.getText().toString());
+            toolbarName.setVisible(true);
+        }
         syllabus1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

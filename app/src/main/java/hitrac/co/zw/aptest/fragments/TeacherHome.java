@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import hitrac.co.zw.aptest.R;
 
 import static hitrac.co.zw.aptest.Dashboard.loginmenuItem;
+import static hitrac.co.zw.aptest.Dashboard.profile;
+import static hitrac.co.zw.aptest.Dashboard.results;
+import static hitrac.co.zw.aptest.Dashboard.toolbarName;
+import static hitrac.co.zw.aptest.fragments.Login.userName;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,6 +73,10 @@ public class TeacherHome extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_teacher_home, container, false);
         loginmenuItem.setTitle("Logout");
+        results.setTitle("Set Test");
+        profile.setTitle("My Tests");
+        toolbarName.setTitle(userName.getText().toString());
+        toolbarName.setVisible(true);
     return  rootView;
     }
 

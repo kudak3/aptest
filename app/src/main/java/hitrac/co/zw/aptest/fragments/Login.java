@@ -4,11 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -32,6 +37,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static hitrac.co.zw.aptest.Dashboard.toolbarName;
 import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
 
 /**
@@ -49,6 +55,8 @@ public class Login extends Fragment {
     private static final String ARG_PARAM2 = "param2";
    public Button loginBtn;
    public static EditText userName,password;
+   public static boolean isLogged=false;
+
     public static OkHttpClient.Builder client = new OkHttpClient.Builder();
 
     // TODO: Rename and change types of parameters
@@ -79,6 +87,9 @@ public class Login extends Fragment {
         return fragment;
     }
 
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +97,10 @@ public class Login extends Fragment {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         client.addInterceptor(loggingInterceptor);
 
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,7 +108,10 @@ public class Login extends Fragment {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_login, container, false);
 
+
         loginBtn=(Button)rootView.findViewById(R.id.loginBtn);
+
+//        toolbarName.setVisible(false);
 
         userName=(EditText)rootView.findViewById(R.id.userName);
         password=(EditText)rootView.findViewById(R.id.password);
@@ -109,17 +126,19 @@ public class Login extends Fragment {
                     password.setError("Enter password");
                 }
                 else {
-                    login();
-//                    Fragment fragment= new Home();
-//                    FragmentManager fragmentManager= getFragmentManager();
-//                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-//                    fragmentTransaction.replace(R.id.fragment_container,fragment);
-//                    fragmentTransaction.commit();
-//                    fragmentTransaction.addToBackStack(null);
+//                    login();
+
+                    isLogged=true;
+                    Fragment fragment= new Home();
+                    FragmentManager fragmentManager= getFragmentManager();
+                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container,fragment);
+                    fragmentTransaction.commit();
+                    fragmentTransaction.addToBackStack(null);
 
                     Toast.makeText(getActivity(), "login successfully!",
                             Toast.LENGTH_LONG).show();
-
+                isLogged=true;
 
 
             }}

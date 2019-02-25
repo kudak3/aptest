@@ -26,7 +26,7 @@ import hitrac.co.zw.aptest.fragments.TeacherHome;
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Subjects.OnFragmentInteractionListener, TeacherHome.OnFragmentInteractionListener, Results.OnFragmentInteractionListener,Home.OnFragmentInteractionListener, Login.OnFragmentInteractionListener {
 
-    public static MenuItem loginmenuItem, toolbarName;
+    public static MenuItem loginmenuItem, toolbarName,results,profile;
     NavigationView navigationView;
 
 
@@ -42,6 +42,9 @@ public class Dashboard extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         loginmenuItem = menu.findItem(R.id.login);
+        results=menu.findItem(R.id.my_results);
+        profile=menu.findItem(R.id.profile);
+
         Fragment fragment= new Login();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
