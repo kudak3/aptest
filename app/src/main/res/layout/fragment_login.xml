@@ -36,12 +36,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:padding="@dimen/padding"
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Username"
-            android:textColorHint="#fff"
+            android:textColorHint="#ff0000"
             android:drawablePadding="12dp"
             android:drawableLeft="@drawable/ic_action_account"
 
@@ -62,7 +62,7 @@
             android:ems="10"
             android:inputType="textPassword"
             android:hint="Password"
-            android:textColorHint="#fff"
+            android:textColorHint="#ff0000"
             android:maxLines="1"
             android:drawablePadding="12dp"
             android:drawableLeft="@drawable/ic_action_password"
@@ -76,7 +76,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
+            android:textColor="#ff0000"
             android:text="Remember me"
             android:layout_marginTop="@dimen/padding"
             android:padding="@dimen/padding"/>
