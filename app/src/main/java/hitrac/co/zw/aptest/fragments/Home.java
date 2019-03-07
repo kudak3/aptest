@@ -34,8 +34,10 @@ public class Home extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Button syllabus1;
-    public Button syllabus2;
+    public Button syllabus1,syllabus2,syllabus3;
+    public static boolean isSyllabus1=false;
+    public static boolean isIsSyllabus2=false;
+    public static boolean isIsSyllabus3=false;
 
 
     private OnFragmentInteractionListener mListener;
@@ -70,6 +72,7 @@ public class Home extends Fragment {
 
         syllabus1=(Button)rootView.findViewById(R.id.syllabus1);
         syllabus2=(Button)rootView.findViewById(R.id.syllabus2);
+        syllabus3=(Button)rootView.findViewById(R.id.syllabus3);
         loginmenuItem.setTitle("Logout");
         results.setTitle("My Results");
         profile.setTitle("My Profile");
@@ -78,9 +81,16 @@ public class Home extends Fragment {
             toolbarName.setTitle(userName.getText().toString());
             toolbarName.setVisible(true);
         }
+
+
+
         syllabus1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                isSyllabus1=true;
+                isIsSyllabus2=false;
+                isIsSyllabus3=false;
                 Fragment fragment= new Subjects();
                 FragmentManager fragmentManager= getFragmentManager();
                 FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
@@ -90,6 +100,36 @@ public class Home extends Fragment {
             }
         });
 
+        syllabus2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isIsSyllabus2=true;
+                isSyllabus1=false;
+                isIsSyllabus3=false;
+                Fragment fragment= new Subjects();
+                FragmentManager fragmentManager= getFragmentManager();
+                FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,fragment);
+                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null);
+
+            }
+        });
+syllabus3.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        isIsSyllabus3=true;
+        isIsSyllabus2=false;
+        isSyllabus1=false;
+        Fragment fragment= new Subjects();
+        FragmentManager fragmentManager= getFragmentManager();
+        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
+        fragmentTransaction.addToBackStack(null);
+
+    }
+});
 
 
         return rootView;

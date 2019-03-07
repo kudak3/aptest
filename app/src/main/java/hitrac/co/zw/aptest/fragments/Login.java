@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -56,6 +56,7 @@ public class Login extends Fragment {
    public Button loginBtn;
    public static EditText userName,password;
    public static boolean isLogged=false;
+   public static String role;
 
     public static OkHttpClient.Builder client = new OkHttpClient.Builder();
 
@@ -111,7 +112,6 @@ public class Login extends Fragment {
 
         loginBtn=(Button)rootView.findViewById(R.id.loginBtn);
 
-//        toolbarName.setVisible(false);
 
         userName=(EditText)rootView.findViewById(R.id.userName);
         password=(EditText)rootView.findViewById(R.id.password);
@@ -129,7 +129,7 @@ public class Login extends Fragment {
 //                    login();
 
                     isLogged=true;
-                    Fragment fragment= new Home();
+                    Fragment fragment= new TeacherHome();
                     FragmentManager fragmentManager= getFragmentManager();
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container,fragment);
@@ -204,13 +204,15 @@ public class Login extends Fragment {
 
                if("userExists".equals(response.headers().get("Responded"))){
 
+                   role=response.headers().get("Role");
+
                    if("student".equals(response.headers().get("Role"))){
                    Fragment fragment= new Home();
                    FragmentManager fragmentManager= getFragmentManager();
                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                    fragmentTransaction.replace(R.id.fragment_container,fragment);
                    fragmentTransaction.commit();
-                   fragmentTransaction.addToBackStack(null);
+
 
                    Toast.makeText(getActivity(), "login successfully!",
                            Toast.LENGTH_LONG).show();
@@ -222,7 +224,7 @@ public class Login extends Fragment {
                        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                        fragmentTransaction.replace(R.id.fragment_container,fragment);
                        fragmentTransaction.commit();
-                       fragmentTransaction.addToBackStack(null);
+
 
                        Toast.makeText(getActivity(), "login successfully!",
                                Toast.LENGTH_LONG).show();

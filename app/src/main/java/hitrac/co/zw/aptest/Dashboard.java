@@ -20,11 +20,21 @@ import android.view.MenuItem;
 import hitrac.co.zw.aptest.fragments.Home;
 import hitrac.co.zw.aptest.fragments.Login;
 import hitrac.co.zw.aptest.fragments.Results;
+import hitrac.co.zw.aptest.fragments.SetTest;
 import hitrac.co.zw.aptest.fragments.Subjects;
 import hitrac.co.zw.aptest.fragments.TeacherHome;
 
+import static hitrac.co.zw.aptest.fragments.Login.isLogged;
+import static hitrac.co.zw.aptest.fragments.Login.role;
+
 public class Dashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Subjects.OnFragmentInteractionListener, TeacherHome.OnFragmentInteractionListener, Results.OnFragmentInteractionListener,Home.OnFragmentInteractionListener, Login.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        Subjects.OnFragmentInteractionListener,
+        TeacherHome.OnFragmentInteractionListener,
+        Results.OnFragmentInteractionListener,
+        Home.OnFragmentInteractionListener,
+        Login.OnFragmentInteractionListener,
+        SetTest.OnFragmentInteractionListener {
 
     public static MenuItem loginmenuItem, toolbarName,results,profile;
     NavigationView navigationView;
@@ -77,8 +87,15 @@ public class Dashboard extends AppCompatActivity
         getMenuInflater().inflate(R.menu.dashboard, menu);
 
         toolbarName=menu.findItem(R.id.toolbarName);
+        if(isLogged){
+            toolbarName.setVisible(true);
+        }else
+            toolbarName.setVisible(false);
+
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -102,7 +119,16 @@ public class Dashboard extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment;
         if (id == R.id.my_results) {
-            // Handle the camera action
+//            if("teacher".equals(role)){
+                fragment=new SetTest();
+                FragmentManager fragmentManager=getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,fragment);
+                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null);
+
+//            }
+
         } else if (id == R.id.profile) {
 
         } else if (id == R.id.login) {

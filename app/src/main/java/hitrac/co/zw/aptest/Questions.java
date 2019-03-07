@@ -2,7 +2,9 @@ package hitrac.co.zw.aptest;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 

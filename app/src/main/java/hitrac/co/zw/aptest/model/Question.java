@@ -7,13 +7,23 @@ public class Question {
     private String answer2;
     private String answer3;
     private String answer4;
+    private String correctAnswer;
 
-    public Question(String question, String answer1, String answer2, String answer3, String answer4) {
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public Question(String question, String answer1, String answer2, String answer3, String answer4, String correctAnswer) {
         this.question = question;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.answer4 = answer4;
+        this.correctAnswer = correctAnswer;
     }
 
     public String getQuestion() {
