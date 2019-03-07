@@ -7,7 +7,7 @@
     tools:context=".fragments.Login"
     android:paddingLeft="18dp"
     android:paddingRight="18dp"
-    android:background="@drawable/background">
+    android:background="@drawable/background_gradient">
 
     <!-- TODO: Update blank fragment layout -->
 <ScrollView
@@ -41,20 +41,17 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Username"
-            android:textColorHint="#ff0000"
+            android:textColorHint="#fff"
             android:drawablePadding="12dp"
             android:drawableLeft="@drawable/ic_action_account"
 
             android:maxLines="1"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#f9d7db" />
+
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:layout_centerHorizontal="true"
@@ -62,21 +59,18 @@
             android:ems="10"
             android:inputType="textPassword"
             android:hint="Password"
-            android:textColorHint="#ff0000"
+            android:textColorHint="#fff"
             android:maxLines="1"
             android:drawablePadding="12dp"
             android:drawableLeft="@drawable/ic_action_password"
 
            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#f9d7db" />
+
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ff0000"
+            android:textColor="#fff"
             android:text="Remember me"
             android:layout_marginTop="@dimen/padding"
             android:padding="@dimen/padding"/>
@@ -98,6 +92,7 @@
             android:textSize="18sp"/>
 
         <Button
+            android:id="@+id/signupBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign up"

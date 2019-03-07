@@ -47,7 +47,7 @@ public class Login extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-   public Button loginBtn;
+   public Button loginBtn,signupBtn;
    public static EditText userName,password;
     public static OkHttpClient.Builder client = new OkHttpClient.Builder();
 
@@ -95,6 +95,7 @@ public class Login extends Fragment {
         View rootView= inflater.inflate(R.layout.fragment_login, container, false);
 
         loginBtn=(Button)rootView.findViewById(R.id.loginBtn);
+        signupBtn=(Button)rootView.findViewById(R.id.signupBtn);
 
         userName=(EditText)rootView.findViewById(R.id.userName);
         password=(EditText)rootView.findViewById(R.id.password);
@@ -109,13 +110,13 @@ public class Login extends Fragment {
                     password.setError("Enter password");
                 }
                 else {
-                    login();
-//                    Fragment fragment= new Home();
-//                    FragmentManager fragmentManager= getFragmentManager();
-//                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-//                    fragmentTransaction.replace(R.id.fragment_container,fragment);
-//                    fragmentTransaction.commit();
-//                    fragmentTransaction.addToBackStack(null);
+//                    login();
+                    Fragment fragment= new Home();
+                    FragmentManager fragmentManager= getFragmentManager();
+                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container,fragment);
+                    fragmentTransaction.commit();
+                    fragmentTransaction.addToBackStack(null);
 
                     Toast.makeText(getActivity(), "login successfully!",
                             Toast.LENGTH_LONG).show();
@@ -124,6 +125,20 @@ public class Login extends Fragment {
 
             }}
         });
+        signupBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Fragment fragment= new Signup();
+                FragmentManager fragmentManager= getFragmentManager();
+                FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,fragment);
+                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null);
+
+            }
+        });
+
+
 
         return  rootView;
     }
