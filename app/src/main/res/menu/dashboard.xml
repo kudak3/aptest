@@ -9,7 +9,6 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/toolbarName"
-        android:title="unknown"
-        android:visible="false"
+        android:title="@string/action_done"
         app:showAsAction="always" />
 </menu>

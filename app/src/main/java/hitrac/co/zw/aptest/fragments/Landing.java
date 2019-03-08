@@ -1,28 +1,26 @@
 package hitrac.co.zw.aptest.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
 
-import static hitrac.co.zw.aptest.fragments.Home.isIsSyllabus2;
-import static hitrac.co.zw.aptest.fragments.Home.isIsSyllabus3;
-import static hitrac.co.zw.aptest.fragments.Home.isSyllabus1;
-
-public class Subjects extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link Landing.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link Landing#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class Landing extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -31,15 +29,22 @@ public class Subjects extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    public ListView subjects;
 
-    public Subjects() {
+    public Landing() {
+        // Required empty public constructor
     }
 
-
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment Landing.
+     */
     // TODO: Rename and change types and number of parameters
-    public static Subjects newInstance(String param1, String param2) {
-        Subjects fragment = new Subjects();
+    public static Landing newInstance(String param1, String param2) {
+        Landing fragment = new Landing();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,46 +65,7 @@ public class Subjects extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_subjects, container, false);
-        subjects=(ListView)rootView.findViewById(R.id.subjects);
-
-        final ArrayList<String> subjectList = new ArrayList<>();
-             if(isSyllabus1==true) {
-
-
-                 subjectList.add("Accounting");
-                 subjectList.add("Biology");
-                 subjectList.add("Chemistry");
-                 subjectList.add("Physics");
-             }
-        else if(isIsSyllabus2==true) {
-
-
-            subjectList.add("Biology");
-            subjectList.add("Chemistry");
-            subjectList.add("Double Science");
-            subjectList.add("Physics");
-        }
-        else if(isIsSyllabus3==true){
-                 subjectList.add("Class B");
-             }
-                 ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, subjectList);
-                 subjects.setAdapter(arrayAdapter);
-
-                 subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                     @Override
-                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                         if (i == 0) {
-                             Intent intent = new Intent(getActivity(), Questions.class);
-                             startActivity(intent);
-                         }
-                     }
-                 });
-
-
-
-
-        return rootView;
+        return inflater.inflate(R.layout.fragment_landing, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
