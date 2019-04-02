@@ -1,9 +1,11 @@
 package hitrac.co.zw.aptest.configuration;
 
+import java.util.List;
+
+import hitrac.co.zw.aptest.model.Syllabus;
 import hitrac.co.zw.aptest.model.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -26,4 +28,7 @@ public interface ApiInterface {
             @Field("id") String id,
             @Field("correctAns") String correctAns
     );
+
+    @GET("syllabus")
+    Call<List<Syllabus>> getAllSyllabus();
 }

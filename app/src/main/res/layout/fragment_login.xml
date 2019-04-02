@@ -26,7 +26,6 @@
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:padding="16dp"
-            android:layout_marginTop="48dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/logo"
             />

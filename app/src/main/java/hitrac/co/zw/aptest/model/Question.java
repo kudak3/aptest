@@ -8,6 +8,7 @@ public class Question {
     private String answer3;
     private String answer4;
     private String correctAnswer;
+    private int questionNumber;
 
     public String getCorrectAnswer() {
         return correctAnswer;
@@ -64,5 +65,13 @@ public class Question {
 
     public void setAnswer4(String answer4) {
         this.answer4 = answer4;
+    }
+
+    public int getQuestionNumber() {
+        return questionNumber;
+    }
+
+    public void setQuestionNumber(int questionNumber) {
+        this.questionNumber = questionNumber;
     }
 }

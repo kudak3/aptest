@@ -1,35 +1,25 @@
 package hitrac.co.zw.aptest.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.IOException;
-
-import hitrac.co.zw.aptest.Dashboard;
-import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
 import hitrac.co.zw.aptest.configuration.ApiInterface;
 import hitrac.co.zw.aptest.configuration.Interceptor;
 import hitrac.co.zw.aptest.model.User;
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +27,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static hitrac.co.zw.aptest.Dashboard.toolbarName;
 import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
 
 /**
@@ -57,6 +46,7 @@ public class Login extends Fragment {
    public static EditText userName,password;
    public static boolean isLogged=false;
    public static String role;
+   private ProgressDialog progressDialog;
 
     public static OkHttpClient.Builder client = new OkHttpClient.Builder();
 
@@ -114,33 +104,37 @@ public class Login extends Fragment {
         signupBtn=(Button)rootView.findViewById(R.id.signupBtn);
 
 
-        userName=(EditText)rootView.findViewById(R.id.userName);
-        password=(EditText)rootView.findViewById(R.id.password);
+        userName=rootView.findViewById(R.id.userName);
+        password=rootView.findViewById(R.id.password);
+        progressDialog = new ProgressDialog(this.getContext());
+        progressDialog.setCancelable(false);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String username = userName.getText().toString();
+                String passwd = password.getText().toString();
 
-                if(userName.getText().toString().length()==0){
+                if(username.isEmpty() ){
                     userName.setError("Enter username first");
-                }else  if(password.getText().toString().length()==0){
+                }else  if(passwd.isEmpty()){
                     password.setError("Enter password");
                 }
                 else {
 //
-//                    login();
+                    login();
 
-                    isLogged=true;
-                    Fragment fragment= new TeacherHome();
-                    FragmentManager fragmentManager= getFragmentManager();
-                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_container,fragment);
-                    fragmentTransaction.commit();
-                    fragmentTransaction.addToBackStack(null);
-
-                    Toast.makeText(getActivity(), "login successfully!",
-                            Toast.LENGTH_LONG).show();
-                isLogged=true;
+//                    isLogged=true;
+//                    Fragment fragment= new TeacherHome();
+//                    FragmentManager fragmentManager= getFragmentManager();
+//                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragment_container,fragment);
+//                    fragmentTransaction.commit();
+//                    fragmentTransaction.addToBackStack(null);
+//
+//                    Toast.makeText(getActivity(), "login successfully!",
+//                            Toast.LENGTH_LONG).show();
+//                isLogged=true;
 
 
             }}
@@ -203,6 +197,9 @@ public class Login extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
     private void login() {
+        progressDialog.setMessage("Logging in ...");
+        showDialog();
+
 
         client.addInterceptor(new Interceptor(userName.getText().toString(), password.getText().toString()));
 
@@ -262,6 +259,15 @@ public class Login extends Fragment {
 
             }
         });
+    }
+    private void showDialog() {
+        if (!progressDialog.isShowing())
+            progressDialog.show();
+    }
+
+    private void hideDialog() {
+        if (progressDialog.isShowing())
+            progressDialog.dismiss();
     }
 }
 

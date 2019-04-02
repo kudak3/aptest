@@ -1,10 +1,8 @@
 package hitrac.co.zw.aptest;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,8 +18,8 @@ public class Questions extends AppCompatActivity {
 
         ListView questions =(ListView)findViewById(R.id.questions);
 
-        Question question1= new Question("what is the sum of 1 and 1","0","1","2","3");
-        Question question2= new Question("what is the difference between 1 and 1","0","1","2","3");
+        Question question1= new Question("what is the sum of 1 and 1","0","1","2","3","2");
+        Question question2= new Question("what is the difference between 1 and 1","0","1","2","3","0");
 
         ArrayList<Question> questionList= new ArrayList<>();
         questionList.add(question1);

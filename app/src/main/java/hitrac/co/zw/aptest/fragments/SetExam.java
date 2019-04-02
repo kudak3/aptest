@@ -1,10 +1,10 @@
 package hitrac.co.zw.aptest.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +12,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hitrac.co.zw.aptest.R;
 import hitrac.co.zw.aptest.configuration.ApiInterface;
 import hitrac.co.zw.aptest.model.Question;
-import okhttp3.ResponseBody;
+import hitrac.co.zw.aptest.model.Syllabus;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,12 +33,12 @@ import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SetTest.OnFragmentInteractionListener} interface
+ * {@link SetExam.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SetTest#newInstance} factory method to
+ * Use the {@link SetExam#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SetTest extends Fragment {
+public class SetExam extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -46,17 +46,22 @@ public class SetTest extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
     public ArrayList<Question> test;
     public  Spinner answerSpinner,answerSpinner1,answerSpinner2,answerSpinner3,answerSpinner4;
 
+    List<Syllabus> syllabi= new ArrayList<>();
+    static OkHttpClient.Builder client = new OkHttpClient.Builder();
+
     private OnFragmentInteractionListener mListener;
 
-    public SetTest() {
+    public SetExam() {
 
     }
 
-    public static SetTest newInstance(String param1, String param2) {
-        SetTest fragment = new SetTest();
+    public static SetExam newInstance(String param1, String param2) {
+        SetExam fragment = new SetExam();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -109,7 +114,7 @@ public class SetTest extends Fragment {
         final TextView ans5_2=(TextView)rootView.findViewById(R.id.answer5_2);
         final TextView ans5_3=(TextView)rootView.findViewById(R.id.answer5_3);
         final TextView ans5_4=(TextView)rootView.findViewById(R.id.answer5_4);
-
+this.getSyllabiList();
         ArrayList<String> syllabi= new ArrayList<>();
         syllabi.add("IGCSE");
         syllabi.add("BGCSE");
@@ -119,6 +124,7 @@ public class SetTest extends Fragment {
         syllabusSpinner.setAdapter(adapter);
 
         final ArrayList<String> subjects= new ArrayList<>();
+
 
       syllabusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -234,6 +240,33 @@ public class SetTest extends Fragment {
 
 
       return rootView;
+    }
+    public void getSyllabiList(){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(client.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiInterface requestService = retrofit.create(ApiInterface.class);
+        Call<List<Syllabus>> call = requestService.getAllSyllabus();
+        call.enqueue(new Callback<List<Syllabus>>() {
+            @Override
+            public void onResponse(Call<List<Syllabus>> call, Response<List<Syllabus>> response) {
+                if(response.isSuccessful()){
+                    syllabi=response.body();
+                    Log.e("SYLLABUS: ",syllabi.toString());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Syllabus>> call, Throwable throwable) {
+                Log.e("ERROR: ", throwable.getMessage());
+
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

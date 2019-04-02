@@ -2,13 +2,10 @@ package hitrac.co.zw.aptest;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,23 +17,22 @@ import android.view.MenuItem;
 import hitrac.co.zw.aptest.fragments.Home;
 import hitrac.co.zw.aptest.fragments.Login;
 import hitrac.co.zw.aptest.fragments.Results;
+import hitrac.co.zw.aptest.fragments.SetExam;
 import hitrac.co.zw.aptest.fragments.Signup;
-import hitrac.co.zw.aptest.fragments.SetTest;
 import hitrac.co.zw.aptest.fragments.Subjects;
 import hitrac.co.zw.aptest.fragments.TeacherHome;
 
 import static hitrac.co.zw.aptest.fragments.Login.isLogged;
-import static hitrac.co.zw.aptest.fragments.Login.role;
 
 public class Dashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Subjects.OnFragmentInteractionListener, TeacherHome.OnFragmentInteractionListener, Results.OnFragmentInteractionListener,Home.OnFragmentInteractionListener, Login.OnFragmentInteractionListener, Signup.OnFragmentInteractionListener {
+
         implements NavigationView.OnNavigationItemSelectedListener,
         Subjects.OnFragmentInteractionListener,
         TeacherHome.OnFragmentInteractionListener,
         Results.OnFragmentInteractionListener,
         Home.OnFragmentInteractionListener,
         Login.OnFragmentInteractionListener,
-        SetTest.OnFragmentInteractionListener {
+        SetExam.OnFragmentInteractionListener,Signup.OnFragmentInteractionListener {
 
     public static MenuItem loginmenuItem, toolbarName,results,profile;
     NavigationView navigationView;
@@ -122,7 +118,7 @@ public class Dashboard extends AppCompatActivity
         Fragment fragment;
         if (id == R.id.my_results) {
 //            if("teacher".equals(role)){
-                fragment=new SetTest();
+                fragment=new SetExam();
                 FragmentManager fragmentManager=getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container,fragment);

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
 import hitrac.co.zw.aptest.model.Question;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
@@ -34,8 +33,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         String  answer2=getItem(position).getAnswer2();
         String  answer3=getItem(position).getAnswer3();
         String  answer4=getItem(position).getAnswer4();
+        String  correctAnswer=getItem(position).getCorrectAnswer();
 
-        Question q=new Question(question,answer1,answer2,answer3,answer4);
+        Question q=new Question(question,answer1,answer2,answer3,answer4,correctAnswer);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView= inflater.inflate(mResource,parent,false);
