@@ -30,12 +30,15 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String question=getItem(position).getQuestion();
-        String  answer1=getItem(position).getAnswer1();
-        String  answer2=getItem(position).getAnswer2();
-        String  answer3=getItem(position).getAnswer3();
-        String  answer4=getItem(position).getAnswer4();
+        String  answer1=getItem(position).getPossibleAnswer1();
+        String  answer2=getItem(position).getPossibleAnswer2();
+        String  answer3=getItem(position).getPossibleAnswer3();
+        String  answer4=getItem(position).getPossibleAnswer4();
+        String  correctAnswer=getItem(position).getCorrectAnswer();
+        String id =getItem(position).getId();
+        int questionNumber=getItem(position).getQuestionNumber();
 
-        Question q=new Question(question,answer1,answer2,answer3,answer4);
+        Question q=new Question(question,answer1,answer2,answer3,answer4,correctAnswer,id,questionNumber);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView= inflater.inflate(mResource,parent,false);

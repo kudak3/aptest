@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "245374591551",
+    "firebase_url": "https://aptest-686ac.firebaseio.com",
+    "project_id": "aptest-686ac",
+    "storage_bucket": "aptest-686ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245374591551:android:eafc45e1adc2d783",
+        "android_client_info": {
+          "package_name": "hitrac.co.zw.aptest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245374591551-1pll9gsro6e8hghf6pkd876g3biqbkc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hitrac.co.zw.aptest",
+            "certificate_hash": "8d2ad4f761efcaf48dd798fac0e86ad9bb53c921"
+          }
+        },
+        {
+          "client_id": "245374591551-jdi8gfo6m26jasiame617f3jfk7eagfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbk2NmddRG8NUOyaEWWccPvCKwRM0CwyI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245374591551-jdi8gfo6m26jasiame617f3jfk7eagfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

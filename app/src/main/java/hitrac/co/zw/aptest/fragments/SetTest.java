@@ -20,7 +20,10 @@ import java.util.ArrayList;
 
 import hitrac.co.zw.aptest.R;
 import hitrac.co.zw.aptest.configuration.ApiInterface;
+import hitrac.co.zw.aptest.model.Exam;
 import hitrac.co.zw.aptest.model.Question;
+import hitrac.co.zw.aptest.model.Subject;
+import hitrac.co.zw.aptest.model.Syllabus;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -193,39 +196,56 @@ public class SetTest extends Fragment {
                 Question q1=new Question(question1.getText().toString(),
                         ans1.getText().toString(),ans2.getText().toString(),
                         ans3.getText().toString(),ans4.getText().toString(),
-                        answerSpinner.getSelectedItem().toString());
+                        answerSpinner.getSelectedItem().toString(),"1",1);
                 Question q2= new Question(question2.getText().toString(),
                         ans2_1.getText().toString(),ans2_2.getText().toString()
                         ,ans2_3.getText().toString(),ans2_4.getText().toString()
-                        ,answerSpinner1.getSelectedItem().toString());
+                        ,answerSpinner1.getSelectedItem().toString(),"2",2);
 
                 Question q3= new Question(question3.getText().toString(),
                         ans3_1.getText().toString(),ans3_2.getText().toString()
                         ,ans3_3.getText().toString(),ans3_4.getText().toString()
-                        ,answerSpinner2.getSelectedItem().toString());
+                        ,answerSpinner2.getSelectedItem().toString(),"3",3);
 
                 Question q4= new Question(question4.getText().toString(),
                         ans4_1.getText().toString(),ans4_2.getText().toString()
                         ,ans4_3.getText().toString(),ans4_4.getText().toString()
-                        ,answerSpinner3.getSelectedItem().toString());
+                        ,answerSpinner3.getSelectedItem().toString(),"4",4);
 
                 Question q5= new Question(question5.getText().toString(),
                         ans5_1.getText().toString(),ans5_2.getText().toString()
                         ,ans5_3.getText().toString(),ans5_4.getText().toString()
-                        ,answerSpinner4.getSelectedItem().toString());
-
+                        ,answerSpinner4.getSelectedItem().toString(),"5",5);
+          test= new ArrayList<>();
                 test.add(q1);
                 test.add(q2);
                 test.add(q3);
                 test.add(q4);
                 test.add(q5);
-
+                final Subject maths= new Subject("50","name");
+                final Syllabus driving= new Syllabus("2","driving");
+                Exam exam= new Exam("examTest","1",test,maths,driving);
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
                 ApiInterface apiInterface= retrofit.create(ApiInterface.class);
+
+                Call<ResponseBody>call= apiInterface.setExam(exam );
+
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Toast.makeText(getActivity(),"zvaita",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+
 
             }
         });

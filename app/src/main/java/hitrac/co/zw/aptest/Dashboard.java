@@ -17,8 +17,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import hitrac.co.zw.aptest.fragments.ExaminationNames;
 import hitrac.co.zw.aptest.fragments.Home;
 import hitrac.co.zw.aptest.fragments.Login;
+import hitrac.co.zw.aptest.fragments.MyTests;
 import hitrac.co.zw.aptest.fragments.Results;
 import hitrac.co.zw.aptest.fragments.SetTest;
 import hitrac.co.zw.aptest.fragments.Subjects;
@@ -34,7 +36,9 @@ public class Dashboard extends AppCompatActivity
         Results.OnFragmentInteractionListener,
         Home.OnFragmentInteractionListener,
         Login.OnFragmentInteractionListener,
-        SetTest.OnFragmentInteractionListener {
+        SetTest.OnFragmentInteractionListener,
+        MyTests.OnFragmentInteractionListener,
+        ExaminationNames.OnFragmentInteractionListener{
 
     public static MenuItem loginmenuItem, toolbarName,results,profile;
     NavigationView navigationView;
@@ -130,6 +134,12 @@ public class Dashboard extends AppCompatActivity
 //            }
 
         } else if (id == R.id.profile) {
+            fragment=new MyTests();
+            FragmentManager fragmentManager=getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container,fragment);
+            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null);
 
         } else if (id == R.id.login) {
          fragment=new Login();

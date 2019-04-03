@@ -126,15 +126,15 @@ public class Login extends Fragment {
                     password.setError("Enter password");
                 }
                 else {
-//                    login();
+                    login();
 
                     isLogged=true;
-                    Fragment fragment= new TeacherHome();
-                    FragmentManager fragmentManager= getFragmentManager();
-                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_container,fragment);
-                    fragmentTransaction.commit();
-                    fragmentTransaction.addToBackStack(null);
+//                    Fragment fragment= new Home();
+//                    FragmentManager fragmentManager= getFragmentManager();
+//                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragment_container,fragment);
+//                    fragmentTransaction.commit();
+//                    fragmentTransaction.addToBackStack(null);
 
                     Toast.makeText(getActivity(), "login successfully!",
                             Toast.LENGTH_LONG).show();
