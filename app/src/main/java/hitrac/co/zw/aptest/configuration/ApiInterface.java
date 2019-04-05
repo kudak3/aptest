@@ -46,4 +46,7 @@ public interface ApiInterface {
 
  @GET("exams")
     Call<List<Exam>>getExams();
+
+    @GET("syllabus")
+    Call<List<Syllabus>> getAllSyllabus();
 }

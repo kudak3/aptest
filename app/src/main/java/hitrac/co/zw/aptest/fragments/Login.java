@@ -1,5 +1,6 @@
 package hitrac.co.zw.aptest.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,29 +8,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.IOException;
-
-import hitrac.co.zw.aptest.Dashboard;
 import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
 import hitrac.co.zw.aptest.configuration.ApiInterface;
 import hitrac.co.zw.aptest.configuration.Interceptor;
 import hitrac.co.zw.aptest.model.User;
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +29,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static hitrac.co.zw.aptest.Dashboard.toolbarName;
 import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
 
 /**
@@ -53,10 +44,11 @@ public class Login extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-   public Button loginBtn;
+   public Button loginBtn,signupBtn;
    public static EditText userName,password;
    public static boolean isLogged=false;
    public static String role;
+   private ProgressDialog progressDialog;
 
     public static OkHttpClient.Builder client = new OkHttpClient.Builder();
 
@@ -111,6 +103,7 @@ public class Login extends Fragment {
 
 
         loginBtn=(Button)rootView.findViewById(R.id.loginBtn);
+        signupBtn=(Button)rootView.findViewById(R.id.signupBtn);
 
 
         userName=(EditText)rootView.findViewById(R.id.userName);
@@ -119,17 +112,22 @@ public class Login extends Fragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String username = userName.getText().toString();
+                String passwd = password.getText().toString();
 
-                if(userName.getText().toString().length()==0){
+                if(username.isEmpty() ){
                     userName.setError("Enter username first");
-                }else  if(password.getText().toString().length()==0){
+                }else  if(passwd.isEmpty()){
                     password.setError("Enter password");
                 }
                 else {
-                    login();
+//
+//                    login();
+                    Intent intent = new Intent(getActivity(), Questions.class);
+                    startActivity(intent);
 
                     isLogged=true;
-//                    Fragment fragment= new Home();
+//                    Fragment fragment= new TeacherHome();
 //                    FragmentManager fragmentManager= getFragmentManager();
 //                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
 //                    fragmentTransaction.replace(R.id.fragment_container,fragment);
@@ -143,6 +141,20 @@ public class Login extends Fragment {
 
             }}
         });
+        signupBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Fragment fragment= new Signup();
+                FragmentManager fragmentManager= getFragmentManager();
+                FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,fragment);
+                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null);
+
+            }
+        });
+
+
 
         return  rootView;
     }
@@ -187,6 +199,9 @@ public class Login extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
     private void login() {
+        progressDialog.setMessage("Logging in ...");
+        showDialog();
+
 
         client.addInterceptor(new Interceptor(userName.getText().toString(), password.getText().toString()));
 
@@ -246,6 +261,15 @@ public class Login extends Fragment {
 
             }
         });
+    }
+    private void showDialog() {
+        if (!progressDialog.isShowing())
+            progressDialog.show();
+    }
+
+    private void hideDialog() {
+        if (progressDialog.isShowing())
+            progressDialog.dismiss();
     }
 }
 

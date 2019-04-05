@@ -8,8 +8,11 @@ public class Question {
     private String possibleAnswer3;
     private String possibleAnswer4;
     private String correctAnswer;
-    private String id;
     private int questionNumber;
+
+
+    private String id;
+
 
     public Question(String question, String possibleAnswer1, String possibleAnswer2, String possibleAnswer3, String possibleAnswer4, String correctAnswer, String id, int questionNumber) {
         this.question = question;

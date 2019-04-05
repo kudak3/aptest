@@ -19,10 +19,12 @@
 
     >
     <RadioGroup
+        android:id="@+id/rdg"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
     <RadioButton
+
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
        android:layout_height="wrap_content"
@@ -51,6 +53,11 @@
            />
 
     </RadioGroup>
+    <TextView
+        android:id="@+id/correct_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+/>
 </LinearLayout>
 
 

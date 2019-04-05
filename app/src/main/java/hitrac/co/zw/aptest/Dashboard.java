@@ -2,13 +2,10 @@ package hitrac.co.zw.aptest;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,13 +20,14 @@ import hitrac.co.zw.aptest.fragments.Login;
 import hitrac.co.zw.aptest.fragments.MyTests;
 import hitrac.co.zw.aptest.fragments.Results;
 import hitrac.co.zw.aptest.fragments.SetTest;
+import hitrac.co.zw.aptest.fragments.Signup;
 import hitrac.co.zw.aptest.fragments.Subjects;
 import hitrac.co.zw.aptest.fragments.TeacherHome;
 
 import static hitrac.co.zw.aptest.fragments.Login.isLogged;
-import static hitrac.co.zw.aptest.fragments.Login.role;
 
 public class Dashboard extends AppCompatActivity
+
         implements NavigationView.OnNavigationItemSelectedListener,
         Subjects.OnFragmentInteractionListener,
         TeacherHome.OnFragmentInteractionListener,
@@ -38,7 +36,8 @@ public class Dashboard extends AppCompatActivity
         Login.OnFragmentInteractionListener,
         SetTest.OnFragmentInteractionListener,
         MyTests.OnFragmentInteractionListener,
-        ExaminationNames.OnFragmentInteractionListener{
+        ExaminationNames.OnFragmentInteractionListener
+       ,Signup.OnFragmentInteractionListener {
 
     public static MenuItem loginmenuItem, toolbarName,results,profile;
     NavigationView navigationView;

@@ -79,21 +79,22 @@ public class MyTests extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiInterface apiInterface= retrofit.create(ApiInterface.class);
-        Call<Exam> call2=apiInterface.getExam("mid-month exam");
+        Call<Exam> call2=apiInterface.getExam("end-of-month");
        call2.enqueue(new Callback<Exam>() {
            @Override
            public void onResponse(Call<Exam> call, Response<Exam> response) {
-               Exam exam=response.body();
-               exams.add(exam.getExamName());
-               examNames.setAdapter(arrayAdapter);
-               examNames.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                   @Override
-                   public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                       Toast.makeText(getActivity(), ((TextView) view).getText(),
-                               Toast.LENGTH_SHORT).show();
-                   }
-               });
-               System.out.println("========-==============0-============"+exam.getQuestionList());
+               System.out.println("////////////////////////"+ response.body());
+//               Exam exam=response.body();
+//               exams.add(exam.getExamName());
+//               examNames.setAdapter(arrayAdapter);
+//               examNames.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                   @Override
+//                   public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                       Toast.makeText(getActivity(), ((TextView) view).getText(),
+////                               Toast.LENGTH_SHORT).show();
+//                   }
+//               });
+//               System.out.println("========-==============0-============"+exam.getQuestionList());
 
            }
 
