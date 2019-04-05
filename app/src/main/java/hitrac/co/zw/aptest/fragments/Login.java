@@ -214,12 +214,13 @@ public class Login extends Fragment {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                Log.d(response.headers().get("Role").toString(),"heresss");
 
                if("userExists".equals(response.headers().get("Responded"))){
 
                    role=response.headers().get("Role");
 
-                   if("student".equals(response.headers().get("Role"))){
+                   if("Student".equals(response.headers().get("Role"))){
                    Fragment fragment= new Home();
                    FragmentManager fragmentManager= getFragmentManager();
                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
@@ -229,6 +230,7 @@ public class Login extends Fragment {
 
                    Toast.makeText(getActivity(), "login successfully!",
                            Toast.LENGTH_LONG).show();
+                   hideDialog();
                }
 
                else{
@@ -241,6 +243,7 @@ public class Login extends Fragment {
 
                        Toast.makeText(getActivity(), "login successfully!",
                                Toast.LENGTH_LONG).show();
+                       hideDialog();
                    }
                }
                else{
@@ -255,6 +258,7 @@ public class Login extends Fragment {
                 Log.d("onFailure", throwable.toString());
 
                 Toast.makeText(getActivity(), "Login failed. Please check your internet connecion.", Toast.LENGTH_SHORT).show();
+                hideDialog();
 
 
             }

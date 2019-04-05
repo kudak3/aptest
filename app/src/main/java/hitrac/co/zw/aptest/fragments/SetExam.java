@@ -116,8 +116,8 @@ public class SetExam extends Fragment {
         final TextView ans5_4=(TextView)rootView.findViewById(R.id.answer5_4);
 this.getSyllabiList();
         ArrayList<String> syllabi= new ArrayList<>();
-        syllabi.add("IGCSE");
-        syllabi.add("BGCSE");
+        syllabi.add("igcse");
+        syllabi.add("bgcse");
         syllabi.add("DRIVING THEORY");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,syllabi);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
