@@ -1,20 +1,14 @@
 package hitrac.co.zw.aptest;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static hitrac.co.zw.aptest.QuestionListAdapter.a;
-import static hitrac.co.zw.aptest.QuestionListAdapter.b;
-import static hitrac.co.zw.aptest.QuestionListAdapter.c;
-import static hitrac.co.zw.aptest.QuestionListAdapter.correct_answer;
-import static hitrac.co.zw.aptest.QuestionListAdapter.d;
 import static hitrac.co.zw.aptest.QuestionListAdapter.number;
-import static hitrac.co.zw.aptest.QuestionListAdapter.radioGroup;
 import static hitrac.co.zw.aptest.QuestionListAdapter.showAnswers;
 import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
 

@@ -1,7 +1,6 @@
 package hitrac.co.zw.aptest.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,9 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
 
 import static hitrac.co.zw.aptest.fragments.Home.isIsSyllabus2;
