@@ -67,7 +67,7 @@ public static ArrayList<Question> questionList;
             @Override
             public void onResponse(Call<Exam> call, Response<Exam> response) {
                exam=response.body();
-//                questionList.addAll(0,exam.getQuestionList());
+                questionList.addAll(0,exam.getQuestionList());
 
 
                 System.out.println("========-==============0-============"+exam.getQuestionList());
@@ -84,10 +84,10 @@ public static ArrayList<Question> questionList;
 
 
       questionList=new ArrayList<>();
-      Question q1=new Question("1+5=","15","6","5","4","D","1",1);
-      Question q2=new Question("1+5=","15","6","5","4","B","2",2);
-      questionList.add(q1);
-      questionList.add(q2);
+//      Question q1=new Question("1+5=","15","6","5","4","D","1",1);
+//      Question q2=new Question("1+5=","15","6","5","4","B","2",2);
+//      questionList.add(q1);
+//      questionList.add(q2);
         ListView questions =(ListView)findViewById(R.id.questions);
         correctAnswers= new ArrayList<>();
 

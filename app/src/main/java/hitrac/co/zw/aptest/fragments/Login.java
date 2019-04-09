@@ -122,9 +122,9 @@ public class Login extends Fragment {
                 }
                 else {
 //
-//                    login();
-                    Intent intent = new Intent(getActivity(), Questions.class);
-                    startActivity(intent);
+                    login();
+//                    Intent intent = new Intent(getActivity(), Questions.class);
+//                    startActivity(intent);
 
                     isLogged=true;
 //                    Fragment fragment= new TeacherHome();
@@ -134,8 +134,7 @@ public class Login extends Fragment {
 //                    fragmentTransaction.commit();
 //                    fragmentTransaction.addToBackStack(null);
 
-                    Toast.makeText(getActivity(), "login successfully!",
-                            Toast.LENGTH_LONG).show();
+
                 isLogged=true;
 
 
@@ -235,7 +234,7 @@ public class Login extends Fragment {
                    hideDialog();
                }
 
-               else{
+               if("Teacher".equals(role)){
                        Fragment fragment= new TeacherHome();
                        FragmentManager fragmentManager= getFragmentManager();
                        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
@@ -249,8 +248,7 @@ public class Login extends Fragment {
                    }
                }
                else{
-
-                   Toast.makeText(getActivity(), "login failed!",
+                   Toast.makeText(getActivity(), "Incorrect credentials! Please try again",
                            Toast.LENGTH_LONG).show();
                }
 
