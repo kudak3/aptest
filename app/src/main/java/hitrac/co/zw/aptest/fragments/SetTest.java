@@ -1,10 +1,10 @@
 package hitrac.co.zw.aptest.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +12,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import hitrac.co.zw.aptest.R;
 import hitrac.co.zw.aptest.configuration.ApiInterface;
+import hitrac.co.zw.aptest.model.Exam;
 import hitrac.co.zw.aptest.model.Question;
+import hitrac.co.zw.aptest.model.Subject;
 import hitrac.co.zw.aptest.model.Syllabus;
-import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,12 +36,12 @@ import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SetExam.OnFragmentInteractionListener} interface
+ * {@link SetTest.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SetExam#newInstance} factory method to
+ * Use the {@link SetTest#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SetExam extends Fragment {
+public class SetTest extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -46,22 +49,17 @@ public class SetExam extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-
     public ArrayList<Question> test;
     public  Spinner answerSpinner,answerSpinner1,answerSpinner2,answerSpinner3,answerSpinner4;
 
-    List<Syllabus> syllabi= new ArrayList<>();
-    static OkHttpClient.Builder client = new OkHttpClient.Builder();
-
     private OnFragmentInteractionListener mListener;
 
-    public SetExam() {
+    public SetTest() {
 
     }
 
-    public static SetExam newInstance(String param1, String param2) {
-        SetExam fragment = new SetExam();
+    public static SetTest newInstance(String param1, String param2) {
+        SetTest fragment = new SetTest();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -114,7 +112,7 @@ public class SetExam extends Fragment {
         final TextView ans5_2=(TextView)rootView.findViewById(R.id.answer5_2);
         final TextView ans5_3=(TextView)rootView.findViewById(R.id.answer5_3);
         final TextView ans5_4=(TextView)rootView.findViewById(R.id.answer5_4);
-this.getSyllabiList();
+
         ArrayList<String> syllabi= new ArrayList<>();
         syllabi.add("igcse");
         syllabi.add("bgcse");
@@ -124,7 +122,6 @@ this.getSyllabiList();
         syllabusSpinner.setAdapter(adapter);
 
         final ArrayList<String> subjects= new ArrayList<>();
-
 
       syllabusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -199,39 +196,56 @@ this.getSyllabiList();
                 Question q1=new Question(question1.getText().toString(),
                         ans1.getText().toString(),ans2.getText().toString(),
                         ans3.getText().toString(),ans4.getText().toString(),
-                        answerSpinner.getSelectedItem().toString());
+                        answerSpinner.getSelectedItem().toString(),"1",1);
                 Question q2= new Question(question2.getText().toString(),
                         ans2_1.getText().toString(),ans2_2.getText().toString()
                         ,ans2_3.getText().toString(),ans2_4.getText().toString()
-                        ,answerSpinner1.getSelectedItem().toString());
+                        ,answerSpinner1.getSelectedItem().toString(),"2",2);
 
                 Question q3= new Question(question3.getText().toString(),
                         ans3_1.getText().toString(),ans3_2.getText().toString()
                         ,ans3_3.getText().toString(),ans3_4.getText().toString()
-                        ,answerSpinner2.getSelectedItem().toString());
+                        ,answerSpinner2.getSelectedItem().toString(),"3",3);
 
                 Question q4= new Question(question4.getText().toString(),
                         ans4_1.getText().toString(),ans4_2.getText().toString()
                         ,ans4_3.getText().toString(),ans4_4.getText().toString()
-                        ,answerSpinner3.getSelectedItem().toString());
+                        ,answerSpinner3.getSelectedItem().toString(),"4",4);
 
                 Question q5= new Question(question5.getText().toString(),
                         ans5_1.getText().toString(),ans5_2.getText().toString()
                         ,ans5_3.getText().toString(),ans5_4.getText().toString()
-                        ,answerSpinner4.getSelectedItem().toString());
-
+                        ,answerSpinner4.getSelectedItem().toString(),"5",5);
+          test= new ArrayList<>();
                 test.add(q1);
                 test.add(q2);
                 test.add(q3);
                 test.add(q4);
                 test.add(q5);
-
+                final Subject maths= new Subject("50","name");
+                final Syllabus driving= new Syllabus("2","driving");
+                Exam exam= new Exam("examTest","1",test,maths,driving);
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
                 ApiInterface apiInterface= retrofit.create(ApiInterface.class);
+
+                Call<ResponseBody>call= apiInterface.setExam(exam );
+
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Toast.makeText(getActivity(),"zvaita",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+
 
             }
         });
@@ -240,33 +254,6 @@ this.getSyllabiList();
 
 
       return rootView;
-    }
-    public void getSyllabiList(){
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiInterface requestService = retrofit.create(ApiInterface.class);
-        Call<List<Syllabus>> call = requestService.getAllSyllabus();
-        call.enqueue(new Callback<List<Syllabus>>() {
-            @Override
-            public void onResponse(Call<List<Syllabus>> call, Response<List<Syllabus>> response) {
-                if(response.isSuccessful()){
-                    syllabi=response.body();
-                    Log.e("SYLLABUS: ",syllabi.toString());
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Syllabus>> call, Throwable throwable) {
-                Log.e("ERROR: ", throwable.getMessage());
-
-            }
-        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

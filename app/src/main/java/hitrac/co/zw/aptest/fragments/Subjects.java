@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
@@ -89,8 +92,14 @@ public class Subjects extends Fragment {
                      @Override
                      public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                          if (i == 0) {
-                             Intent intent = new Intent(getActivity(), Questions.class);
-                             startActivity(intent);
+
+
+                             Fragment fragment= new ExaminationNames();
+                             FragmentManager fragmentManager = getFragmentManager();
+                             FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                             fragmentTransaction.replace(R.id.fragment_container,fragment);
+                             fragmentTransaction.commit();
+                             fragmentTransaction.addToBackStack(null);
                          }
                      }
                  });

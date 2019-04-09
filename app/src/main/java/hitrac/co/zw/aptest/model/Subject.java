@@ -1,11 +1,10 @@
 package hitrac.co.zw.aptest.model;
 
-public class Role {
+public class Subject {
+    private String id;
+    private String name;
 
-   public String id;
-   public String name;
-
-    public Role(String id, String name) {
+    public Subject(String id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -24,5 +23,13 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

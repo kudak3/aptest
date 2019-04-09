@@ -3,28 +3,26 @@ package hitrac.co.zw.aptest.model;
 public class Question {
 
     private String question;
-    private String answer1;
-    private String answer2;
-    private String answer3;
-    private String answer4;
+    private String possibleAnswer1;
+    private String possibleAnswer2;
+    private String possibleAnswer3;
+    private String possibleAnswer4;
     private String correctAnswer;
     private int questionNumber;
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
 
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
+    private String id;
 
-    public Question(String question, String answer1, String answer2, String answer3, String answer4, String correctAnswer) {
+
+    public Question(String question, String possibleAnswer1, String possibleAnswer2, String possibleAnswer3, String possibleAnswer4, String correctAnswer, String id, int questionNumber) {
         this.question = question;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
-        this.answer3 = answer3;
-        this.answer4 = answer4;
+        this.possibleAnswer1 = possibleAnswer1;
+        this.possibleAnswer2 = possibleAnswer2;
+        this.possibleAnswer3 = possibleAnswer3;
+        this.possibleAnswer4 = possibleAnswer4;
         this.correctAnswer = correctAnswer;
+        this.id = id;
+        this.questionNumber = questionNumber;
     }
 
     public String getQuestion() {
@@ -35,36 +33,52 @@ public class Question {
         this.question = question;
     }
 
-    public String getAnswer1() {
-        return answer1;
+    public String getPossibleAnswer1() {
+        return possibleAnswer1;
     }
 
-    public void setAnswer1(String answer1) {
-        this.answer1 = answer1;
+    public void setPossibleAnswer1(String possibleAnswer1) {
+        this.possibleAnswer1 = possibleAnswer1;
     }
 
-    public String getAnswer2() {
-        return answer2;
+    public String getPossibleAnswer2() {
+        return possibleAnswer2;
     }
 
-    public void setAnswer2(String answer2) {
-        this.answer2 = answer2;
+    public void setPossibleAnswer2(String possibleAnswer2) {
+        this.possibleAnswer2 = possibleAnswer2;
     }
 
-    public String getAnswer3() {
-        return answer3;
+    public String getPossibleAnswer3() {
+        return possibleAnswer3;
     }
 
-    public void setAnswer3(String answer3) {
-        this.answer3 = answer3;
+    public void setPossibleAnswer3(String possibleAnswer3) {
+        this.possibleAnswer3 = possibleAnswer3;
     }
 
-    public String getAnswer4() {
-        return answer4;
+    public String getPossibleAnswer4() {
+        return possibleAnswer4;
     }
 
-    public void setAnswer4(String answer4) {
-        this.answer4 = answer4;
+    public void setPossibleAnswer4(String possibleAnswer4) {
+        this.possibleAnswer4 = possibleAnswer4;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getQuestionNumber() {
@@ -73,5 +87,19 @@ public class Question {
 
     public void setQuestionNumber(int questionNumber) {
         this.questionNumber = questionNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "question='" + question + '\'' +
+                ", possibleAnswer1='" + possibleAnswer1 + '\'' +
+                ", possibleAnswer2='" + possibleAnswer2 + '\'' +
+                ", possibleAnswer3='" + possibleAnswer3 + '\'' +
+                ", possibleAnswer4='" + possibleAnswer4 + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", id='" + id + '\'' +
+                ", questionNumber=" + questionNumber +
+                '}';
     }
 }

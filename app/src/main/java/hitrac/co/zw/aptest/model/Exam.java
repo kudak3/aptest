@@ -2,21 +2,22 @@ package hitrac.co.zw.aptest.model;
 
 import java.util.List;
 
-import javax.security.auth.Subject;
-
 public class Exam {
-    private String id;
-    private String examName;
-    private Syllabus syllabus;
-    private Subject subject;
-    private List<Question> questionList;
 
-    public String getId() {
-        return id;
-    }
+   private String examName;
+   private String id;
+   private List<Question>questionList;
+   private Subject subject;
+   private Syllabus syllabus;
 
-    public void setId(String id) {
+
+
+    public Exam(String examName, String id, List<Question> questionList, Subject subject, Syllabus syllabus) {
+        this.examName = examName;
         this.id = id;
+        this.questionList = questionList;
+        this.subject = subject;
+        this.syllabus = syllabus;
     }
 
     public String getExamName() {
@@ -27,12 +28,20 @@ public class Exam {
         this.examName = examName;
     }
 
-    public Syllabus getSyllabus() {
-        return syllabus;
+    public String getId() {
+        return id;
     }
 
-    public void setSyllabus(Syllabus syllabus) {
-        this.syllabus = syllabus;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Question> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(List<Question> questionList) {
+        this.questionList = questionList;
     }
 
     public Subject getSubject() {
@@ -43,11 +52,23 @@ public class Exam {
         this.subject = subject;
     }
 
-    public List<Question> getQuestionList() {
-        return questionList;
+    public Syllabus getSyllabus() {
+        return syllabus;
     }
 
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
+    public void setSyllabus(Syllabus syllabus) {
+        this.syllabus = syllabus;
+    }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "examName='" + examName + '\'' +
+                ", id='" + id + '\'' +
+                ", questionList=" + questionList +
+                ", subject=" + subject +
+                ", syllabus=" + syllabus +
+                '}';
     }
 }
+

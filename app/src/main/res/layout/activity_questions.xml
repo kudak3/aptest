@@ -8,8 +8,27 @@
     tools:context=".Questions">
 
     <ListView
+        android:id="@+id/questionNames"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/questions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/submit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/questions"></ListView>
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="submit" />
+
 
 </RelativeLayout>
