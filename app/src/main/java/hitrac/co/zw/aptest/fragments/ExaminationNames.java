@@ -85,16 +85,17 @@ public class ExaminationNames extends Fragment {
                System.out.println("///////////////////////////*"+response.body());
                List<Exam> ex= response.body();
 
-                   names=new ArrayList<>();
+               names=new ArrayList<>();
 
                        names.add(ex.get(0).getExamName());
-                       names.add(ex.get(1).getExamName());
 
 
-                       final ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, names);
 
-                       examinationNames.setAdapter(arrayAdapter);
-                       System.out.println("////////////////////****************/"+names);
+
+               final ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, names);
+
+               examinationNames.setAdapter(arrayAdapter);
+
 
                examinationNames.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                    @Override
@@ -104,7 +105,6 @@ public class ExaminationNames extends Fragment {
                        startActivity(intent);
                    }
                });
-
            }
 
            @Override
@@ -112,7 +112,6 @@ public class ExaminationNames extends Fragment {
 
            }
        });
-
         return rootView;
     }
 

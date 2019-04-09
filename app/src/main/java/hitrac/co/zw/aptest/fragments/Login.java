@@ -122,9 +122,9 @@ public class Login extends Fragment {
                 }
                 else {
 //
-//                    login();
-                    Intent intent = new Intent(getActivity(), Questions.class);
-                    startActivity(intent);
+                    login();
+//                    Intent intent = new Intent(getActivity(), Questions.class);
+//                    startActivity(intent);
 
                     isLogged=true;
 //                    Fragment fragment= new TeacherHome();
@@ -134,8 +134,7 @@ public class Login extends Fragment {
 //                    fragmentTransaction.commit();
 //                    fragmentTransaction.addToBackStack(null);
 
-                    Toast.makeText(getActivity(), "login successfully!",
-                            Toast.LENGTH_LONG).show();
+
                 isLogged=true;
 
 
@@ -199,8 +198,8 @@ public class Login extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
     private void login() {
-        progressDialog.setMessage("Logging in ...");
-        showDialog();
+//        progressDialog.setMessage("Logging in ...");
+//        showDialog();
 
 
         client.addInterceptor(new Interceptor(userName.getText().toString(), password.getText().toString()));
@@ -221,7 +220,7 @@ public class Login extends Fragment {
 
                    role=response.headers().get("Role");
 
-                   if("student".equals(response.headers().get("Role"))){
+                   if("student".equals(role)){
                    Fragment fragment= new Home();
                    FragmentManager fragmentManager= getFragmentManager();
                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
@@ -233,7 +232,7 @@ public class Login extends Fragment {
                            Toast.LENGTH_LONG).show();
                }
 
-               else{
+               if("Teacher".equals(role)){
                        Fragment fragment= new TeacherHome();
                        FragmentManager fragmentManager= getFragmentManager();
                        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
@@ -243,11 +242,11 @@ public class Login extends Fragment {
 
                        Toast.makeText(getActivity(), "login successfully!",
                                Toast.LENGTH_LONG).show();
+
                    }
                }
                else{
-
-                   Toast.makeText(getActivity(), "login failed!",
+                   Toast.makeText(getActivity(), "Incorrect credentials! Please try again",
                            Toast.LENGTH_LONG).show();
                }
 
