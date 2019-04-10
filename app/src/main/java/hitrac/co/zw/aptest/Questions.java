@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import hitrac.co.zw.aptest.configuration.ApiInterface;
+import hitrac.co.zw.aptest.configuration.Interceptor;
 import hitrac.co.zw.aptest.fragments.ExaminationNames;
 import hitrac.co.zw.aptest.model.Exam;
 import hitrac.co.zw.aptest.model.Question;
@@ -25,8 +26,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static hitrac.co.zw.aptest.QuestionListAdapter.number;
-import static hitrac.co.zw.aptest.QuestionListAdapter.showAnswers;
 import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
+import static hitrac.co.zw.aptest.fragments.Login.client;
+import static hitrac.co.zw.aptest.fragments.Login.password;
+import static hitrac.co.zw.aptest.fragments.Login.userName;
+
+//import static hitrac.co.zw.aptest.QuestionListAdapter.showAnswers;
 
 public class Questions extends AppCompatActivity {
 public Exam exam;
@@ -57,8 +62,10 @@ public static ArrayList<Question> questionList;
             }
         }).start();
 
+        client.addInterceptor(new Interceptor(userName.getText().toString(),password.getText().toString()));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiInterface apiInterface= retrofit.create(ApiInterface.class);
@@ -128,15 +135,15 @@ public static ArrayList<Question> questionList;
                     int score = 0;
                     ArrayList<String> mark = new ArrayList<>();
 
-                    for (int i = 0; i < adapter.getCount(); i++) {
-                        if (correctAnswers.get(i).equals(number.get(i))) {
-                            mark.add("1");
-                        }
+//                    for (int i = 0; i < adapter.getCount(); i++) {
+//                        if (correctAnswers.get(i).equals(number.get(i))) {
+//                            mark.add("1");
+//                        }
+//
+//                    }
+//                    score = mark.size();
 
-                    }
-                    score = mark.size();
-
-                    showAnswers();
+//                    showAnswers();
 
 
                     Toast.makeText(getApplicationContext(), "You scored " + score + " out of " + questionList.size(), Toast.LENGTH_SHORT).show();

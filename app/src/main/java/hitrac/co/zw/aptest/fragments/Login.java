@@ -2,7 +2,6 @@ package hitrac.co.zw.aptest.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
 import hitrac.co.zw.aptest.configuration.ApiInterface;
 import hitrac.co.zw.aptest.configuration.Interceptor;
@@ -108,6 +106,8 @@ public class Login extends Fragment {
 
         userName=(EditText)rootView.findViewById(R.id.userName);
         password=(EditText)rootView.findViewById(R.id.password);
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCancelable(false);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,6 +256,7 @@ public class Login extends Fragment {
             @Override
             public void onFailure(Call<User> call, Throwable throwable) {
                 Log.d("onFailure", throwable.toString());
+                System.out.println("========================");
 
                 Toast.makeText(getActivity(), "Login failed. Please check your internet connecion.", Toast.LENGTH_SHORT).show();
                 hideDialog();

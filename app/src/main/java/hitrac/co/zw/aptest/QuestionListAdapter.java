@@ -121,11 +121,11 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         return convertView;
 
     }
-    public static void showAnswers(){
-        for(i=0;i<Questions.questionList.size();i++){
-            correct_answer.setText(Questions.correctAnswers.get(i));
-        }
-    }
+//    public static void showAnswers(){
+//        for(i=0;i<Questions.questionList.size();i++){
+//            correct_answer.setText(Questions.correctAnswers.get(i));
+//        }
+//    }
 
 
 

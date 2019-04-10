@@ -19,7 +19,10 @@ import java.util.List;
 import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
 import hitrac.co.zw.aptest.configuration.ApiInterface;
+import hitrac.co.zw.aptest.configuration.Interceptor;
 import hitrac.co.zw.aptest.model.Exam;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +30,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
+import static hitrac.co.zw.aptest.fragments.Login.password;
+import static hitrac.co.zw.aptest.fragments.Login.userName;
 
 
 public class ExaminationNames extends Fragment {
@@ -36,6 +41,7 @@ public class ExaminationNames extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    public static OkHttpClient.Builder client = new OkHttpClient.Builder();
 
     public ListView examinationNames;
     public static ArrayList<String> names;
@@ -59,6 +65,10 @@ public class ExaminationNames extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        client.addInterceptor(loggingInterceptor);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -70,9 +80,13 @@ public class ExaminationNames extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView= inflater.inflate(R.layout.fragment_examination_names, container, false);
-         examinationNames=(ListView)rootView.findViewById(R.id.examinationNames);
+         examinationNames=rootView.findViewById(R.id.examinationNames);
+
+        client.addInterceptor(new Interceptor(userName.getText().toString(),password.getText().toString()));
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiInterface apiInterface= retrofit.create(ApiInterface.class);
@@ -81,6 +95,9 @@ public class ExaminationNames extends Fragment {
        call.enqueue(new Callback<List<Exam>>() {
            @Override
            public void onResponse(Call<List<Exam>> call, Response<List<Exam>> response) {
+               System.out.println("1 ///////////////////////////*"+call.request().url());
+               System.out.println("1 ///////////////////////////*"+call.request().headers().toString());
+               System.out.println("1 ///////////////////////////*"+response.isSuccessful());
                System.out.println("///////////////////////////*"+response.body());
                List<Exam> ex= response.body();
 
