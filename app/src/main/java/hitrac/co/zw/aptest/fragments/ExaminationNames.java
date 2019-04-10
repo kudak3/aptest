@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,7 @@ import java.util.List;
 import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
 import hitrac.co.zw.aptest.configuration.ApiInterface;
+import hitrac.co.zw.aptest.configuration.Interceptor;
 import hitrac.co.zw.aptest.model.Exam;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,11 +70,15 @@ public class ExaminationNames extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+
         View rootView= inflater.inflate(R.layout.fragment_examination_names, container, false);
          examinationNames=(ListView)rootView.findViewById(R.id.examinationNames);
+         Login.client.addInterceptor(new Interceptor(Login.userName.getText().toString(),Login.password.getText().toString()));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(Login.client.build())
                 .build();
         ApiInterface apiInterface= retrofit.create(ApiInterface.class);
 

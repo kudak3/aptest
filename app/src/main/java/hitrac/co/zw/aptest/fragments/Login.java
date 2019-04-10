@@ -108,6 +108,7 @@ public class Login extends Fragment {
 
         userName=(EditText)rootView.findViewById(R.id.userName);
         password=(EditText)rootView.findViewById(R.id.password);
+        progressDialog= new ProgressDialog(getContext());
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +127,7 @@ public class Login extends Fragment {
 //                    Intent intent = new Intent(getActivity(), Questions.class);
 //                    startActivity(intent);
 
-                    isLogged=true;
+
 //                    Fragment fragment= new TeacherHome();
 //                    FragmentManager fragmentManager= getFragmentManager();
 //                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
@@ -135,7 +136,6 @@ public class Login extends Fragment {
 //                    fragmentTransaction.addToBackStack(null);
 
 
-                isLogged=true;
 
 
             }}
@@ -198,7 +198,7 @@ public class Login extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
     private void login() {
-//        progressDialog.setMessage("Logging in ...");
+        progressDialog.setMessage("Logging in ...");
 //        showDialog();
 
 
@@ -216,11 +216,12 @@ public class Login extends Fragment {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
 
+
                if("userExists".equals(response.headers().get("Responded"))){
 
                    role=response.headers().get("Role");
 
-                   if("student".equals(role)){
+                   if("student".equals(response.headers().get("Role"))){
                    Fragment fragment= new Home();
                    FragmentManager fragmentManager= getFragmentManager();
                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
@@ -230,6 +231,7 @@ public class Login extends Fragment {
 
                    Toast.makeText(getActivity(), "login successfully!",
                            Toast.LENGTH_LONG).show();
+                   hideDialog();
                }
 
                if("Teacher".equals(role)){
@@ -242,7 +244,7 @@ public class Login extends Fragment {
 
                        Toast.makeText(getActivity(), "login successfully!",
                                Toast.LENGTH_LONG).show();
-
+                       hideDialog();
                    }
                }
                else{
@@ -256,6 +258,7 @@ public class Login extends Fragment {
                 Log.d("onFailure", throwable.toString());
 
                 Toast.makeText(getActivity(), "Login failed. Please check your internet connecion.", Toast.LENGTH_SHORT).show();
+                hideDialog();
 
 
             }

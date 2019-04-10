@@ -1,7 +1,6 @@
 package hitrac.co.zw.aptest.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -114,8 +112,8 @@ public class SetTest extends Fragment {
         final TextView ans5_4=(TextView)rootView.findViewById(R.id.answer5_4);
 
         ArrayList<String> syllabi= new ArrayList<>();
-        syllabi.add("IGCSE");
-        syllabi.add("BGCSE");
+        syllabi.add("igcse");
+        syllabi.add("bgcse");
         syllabi.add("DRIVING THEORY");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,syllabi);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

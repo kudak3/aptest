@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import hitrac.co.zw.aptest.R;
 
@@ -29,7 +29,7 @@ public class Home extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Button syllabus1,syllabus2,syllabus3;
+    public ImageView syllabus1,syllabus2,syllabus3,settings;
     public static boolean isSyllabus1=false;
     public static boolean isIsSyllabus2=false;
     public static boolean isIsSyllabus3=false;
@@ -65,9 +65,10 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.fragment_home, container, false);
 
-        syllabus1=(Button)rootView.findViewById(R.id.syllabus1);
-        syllabus2=(Button)rootView.findViewById(R.id.syllabus2);
-        syllabus3=(Button)rootView.findViewById(R.id.syllabus3);
+        syllabus1=rootView.findViewById(R.id.syllabus1);
+        syllabus2=rootView.findViewById(R.id.syllabus2);
+        syllabus3=rootView.findViewById(R.id.syllabus3);
+//        settings = rootView.findViewById(R.id.configure);
         loginmenuItem.setTitle("Logout");
         results.setTitle("My Results");
         profile.setTitle("My Profile");
@@ -112,7 +113,7 @@ public class Home extends Fragment {
         });
 syllabus3.setOnClickListener(new View.OnClickListener() {
     @Override
-    public void onClick(View view) {
+    public void onClick(View view) {http://localhost:8105/swagger-ui.html#/user-controller
         isIsSyllabus3=true;
         isIsSyllabus2=false;
         isSyllabus1=false;

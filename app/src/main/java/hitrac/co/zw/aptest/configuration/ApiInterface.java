@@ -3,13 +3,10 @@ package hitrac.co.zw.aptest.configuration;
 import java.util.List;
 
 import hitrac.co.zw.aptest.model.Exam;
-import hitrac.co.zw.aptest.model.Question;
-import hitrac.co.zw.aptest.model.Subject;
 import hitrac.co.zw.aptest.model.Syllabus;
 import hitrac.co.zw.aptest.model.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

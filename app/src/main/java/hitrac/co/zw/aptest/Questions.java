@@ -1,26 +1,21 @@
 package hitrac.co.zw.aptest;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import hitrac.co.zw.aptest.configuration.ApiInterface;
+import hitrac.co.zw.aptest.configuration.Interceptor;
 import hitrac.co.zw.aptest.fragments.ExaminationNames;
 import hitrac.co.zw.aptest.model.Exam;
 import hitrac.co.zw.aptest.model.Question;
@@ -30,22 +25,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static hitrac.co.zw.aptest.QuestionListAdapter.a;
-import static hitrac.co.zw.aptest.QuestionListAdapter.b;
-import static hitrac.co.zw.aptest.QuestionListAdapter.c;
-import static hitrac.co.zw.aptest.QuestionListAdapter.correct_answer;
-import static hitrac.co.zw.aptest.QuestionListAdapter.d;
 import static hitrac.co.zw.aptest.QuestionListAdapter.number;
-import static hitrac.co.zw.aptest.QuestionListAdapter.radioGroup;
-import static hitrac.co.zw.aptest.QuestionListAdapter.showAnswers;
 import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
+import static hitrac.co.zw.aptest.fragments.Login.client;
+import static hitrac.co.zw.aptest.fragments.Login.password;
+import static hitrac.co.zw.aptest.fragments.Login.userName;
+
+//import static hitrac.co.zw.aptest.QuestionListAdapter.showAnswers;
 
 public class Questions extends AppCompatActivity {
-public Exam exam;
-public static ArrayList<Question> questionList;
-  public ProgressDialog progressDialog;
-  public Button submit_btn;
-  public static ArrayList<String> correctAnswers;
+    public Exam exam;
+    public static ArrayList<Question> questionList;
+    public ProgressDialog progressDialog;
+    public Button submit_btn;
+    public static ArrayList<String> correctAnswers;
 
 
     @Override
@@ -69,8 +62,10 @@ public static ArrayList<Question> questionList;
             }
         }).start();
 
+        client.addInterceptor(new Interceptor(userName.getText().toString(),password.getText().toString()));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiInterface apiInterface= retrofit.create(ApiInterface.class);
@@ -78,12 +73,18 @@ public static ArrayList<Question> questionList;
         call2.enqueue(new Callback<Exam>() {
             @Override
             public void onResponse(Call<Exam> call, Response<Exam> response) {
-               exam=response.body();
+                exam=response.body();
                 questionList.addAll(0,exam.getQuestionList());
+                for(int i=0;i<questionList.size();i++){
+                    correctAnswers.add(questionList.get(i).getCorrectAnswer());
+                }
+
+
+
 
 
                 System.out.println("========-==============0-============"+exam.getQuestionList());
-               progressDialog.hide();
+                progressDialog.hide();
             }
 
             @Override
@@ -95,7 +96,7 @@ public static ArrayList<Question> questionList;
         });
 
 
-      questionList=new ArrayList<>();
+        questionList=new ArrayList<>();
 //      Question q1=new Question("1+5=","15","6","5","4","D","1",1);
 //      Question q2=new Question("1+5=","15","6","5","4","B","2",2);
 //      questionList.add(q1);
@@ -109,18 +110,19 @@ public static ArrayList<Question> questionList;
 
 
 
+
+
         final QuestionListAdapter adapter= new QuestionListAdapter(this,R.layout.question_layout,questionList);
         questions.setAdapter(adapter);
-        for(int i=0;i<questionList.size();i++){
-            correctAnswers.add(questionList.get(i).getCorrectAnswer());
-        }
+
+
 
         submit_btn=(Button)findViewById(R.id.submit_btn);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(number.size()==0){
+                if (number.size() == 0) {
                     LayoutInflater inflater = getLayoutInflater();
                     View layout = inflater.inflate(R.layout.toast_layout,
                             (ViewGroup) findViewById(R.id.toast_layout_root));
@@ -136,19 +138,21 @@ public static ArrayList<Question> questionList;
                     toast.show();
 
 
-                }else {
+                } else {
+
+                    System.out.println("............................."+number.size());
                     int score = 0;
                     ArrayList<String> mark = new ArrayList<>();
 
-                    for (int i = 0; i < adapter.getCount(); i++) {
-                        if (correctAnswers.get(i).equals(number.get(i))) {
-                            mark.add("1");
-                        }
+//                    for (int i = 0; i < adapter.getCount(); i++) {
+//                        if (correctAnswers.get(i).equals(number.get(i))) {
+//                            mark.add("1");
+//                        }
+//
+//                    }
+//                    score = mark.size();
 
-                    }
-                    score = mark.size();
-
-                    showAnswers();
+//                    showAnswers();
 
 
                     Toast.makeText(getApplicationContext(), "You scored " + score + " out of " + questionList.size(), Toast.LENGTH_SHORT).show();
