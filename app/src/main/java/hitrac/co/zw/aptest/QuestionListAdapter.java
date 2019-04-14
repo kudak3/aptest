@@ -75,6 +75,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             }
         });
 
+
         b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

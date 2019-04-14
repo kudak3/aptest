@@ -34,11 +34,11 @@ import static hitrac.co.zw.aptest.fragments.Login.userName;
 //import static hitrac.co.zw.aptest.QuestionListAdapter.showAnswers;
 
 public class Questions extends AppCompatActivity {
-public Exam exam;
-public static ArrayList<Question> questionList;
-  public ProgressDialog progressDialog;
-  public Button submit_btn;
-  public static ArrayList<String> correctAnswers;
+    public Exam exam;
+    public static ArrayList<Question> questionList;
+    public ProgressDialog progressDialog;
+    public Button submit_btn;
+    public static ArrayList<String> correctAnswers;
 
 
     @Override
@@ -73,12 +73,18 @@ public static ArrayList<Question> questionList;
         call2.enqueue(new Callback<Exam>() {
             @Override
             public void onResponse(Call<Exam> call, Response<Exam> response) {
-               exam=response.body();
+                exam=response.body();
                 questionList.addAll(0,exam.getQuestionList());
+                for(int i=0;i<questionList.size();i++){
+                    correctAnswers.add(questionList.get(i).getCorrectAnswer());
+                }
+
+
+
 
 
                 System.out.println("========-==============0-============"+exam.getQuestionList());
-               progressDialog.hide();
+                progressDialog.hide();
             }
 
             @Override
@@ -90,7 +96,7 @@ public static ArrayList<Question> questionList;
         });
 
 
-      questionList=new ArrayList<>();
+        questionList=new ArrayList<>();
 //      Question q1=new Question("1+5=","15","6","5","4","D","1",1);
 //      Question q2=new Question("1+5=","15","6","5","4","B","2",2);
 //      questionList.add(q1);
@@ -104,18 +110,19 @@ public static ArrayList<Question> questionList;
 
 
 
+
+
         final QuestionListAdapter adapter= new QuestionListAdapter(this,R.layout.question_layout,questionList);
         questions.setAdapter(adapter);
-        for(int i=0;i<questionList.size();i++){
-            correctAnswers.add(questionList.get(i).getCorrectAnswer());
-        }
+
+
 
         submit_btn=(Button)findViewById(R.id.submit_btn);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(number.size()==0){
+                if (number.size() == 0) {
                     LayoutInflater inflater = getLayoutInflater();
                     View layout = inflater.inflate(R.layout.toast_layout,
                             (ViewGroup) findViewById(R.id.toast_layout_root));
@@ -131,7 +138,9 @@ public static ArrayList<Question> questionList;
                     toast.show();
 
 
-                }else {
+                } else {
+
+                    System.out.println("............................."+number.size());
                     int score = 0;
                     ArrayList<String> mark = new ArrayList<>();
 
