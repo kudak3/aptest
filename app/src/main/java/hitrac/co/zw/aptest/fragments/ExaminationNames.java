@@ -74,7 +74,7 @@ public class ExaminationNames extends Fragment {
 
         View rootView= inflater.inflate(R.layout.fragment_examination_names, container, false);
          examinationNames=(ListView)rootView.findViewById(R.id.examinationNames);
-         Login.client.addInterceptor(new Interceptor(Login.userName.getText().toString(),Login.password.getText().toString()));
+         Login.client.addInterceptor(new Interceptor(Login.etUserName.getText().toString(),Login.etPassword.getText().toString()));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

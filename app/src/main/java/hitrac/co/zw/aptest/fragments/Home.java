@@ -17,8 +17,8 @@ import static hitrac.co.zw.aptest.Dashboard.loginmenuItem;
 import static hitrac.co.zw.aptest.Dashboard.profile;
 import static hitrac.co.zw.aptest.Dashboard.results;
 import static hitrac.co.zw.aptest.Dashboard.toolbarName;
+import static hitrac.co.zw.aptest.fragments.Login.etUserName;
 import static hitrac.co.zw.aptest.fragments.Login.isLogged;
-import static hitrac.co.zw.aptest.fragments.Login.userName;
 
 
 public class Home extends Fragment {
@@ -74,7 +74,7 @@ public class Home extends Fragment {
         profile.setTitle("My Profile");
 
         if(isLogged) {
-            toolbarName.setTitle(userName.getText().toString());
+            toolbarName.setTitle(etUserName.getText().toString());
             toolbarName.setVisible(true);
         }
 

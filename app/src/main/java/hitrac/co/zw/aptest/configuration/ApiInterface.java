@@ -46,4 +46,7 @@ public interface ApiInterface {
 
     @GET("syllabus")
     Call<List<Syllabus>> getAllSyllabus();
+
+    @POST("user")
+    Call<ResponseBody> signUpUser(@Body User user);
 }

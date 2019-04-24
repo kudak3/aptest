@@ -143,7 +143,7 @@ android:layout_height="match_parent">
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:padding="10dp"
-                android:background="@drawable/settings"
+                android:background="@drawable/ic_action_username"
                 />
             <TextView
                 android:layout_width="wrap_content"
