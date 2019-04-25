@@ -297,6 +297,7 @@ public class Signup extends Fragment {
 
         return valid;
     }
+
     private void showDialog() {
         if (!progressDialog.isShowing())
             progressDialog.show();
