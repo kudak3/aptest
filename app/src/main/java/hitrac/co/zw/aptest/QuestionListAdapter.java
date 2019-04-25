@@ -1,8 +1,10 @@
 package hitrac.co.zw.aptest;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,17 +22,25 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 
     private Context mContext;
     int mResource;
-    public static ArrayList<String> number;
+    public static ArrayList<String> number , selectedAnswers ;
     public static  RadioButton a,b,c,d;
     public static  RadioGroup radioGroup;
     public static TextView correct_answer;
     public static int i;
 
+
     public QuestionListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Question> objects) {
         super(context, resource, objects);
         mContext=context;
         mResource=resource;
+
+        selectedAnswers = new ArrayList<>();
+        for(i=0;i<5;i++){
+            selectedAnswers.add("4");
+        }
     }
+
+
 
     @NonNull
     @Override
@@ -60,12 +70,19 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         d=(RadioButton)convertView.findViewById(R.id.textView5);
         correct_answer=(TextView)convertView.findViewById(R.id.correct_answer);
 
-
         a.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                a.setTag(position);
                 if(b){
                     number.add("A");
+
+                    selectedAnswers.set(position ,"0");
+                    System.out.println("-=-=-=-=-=-position"+position);
+                    System.out.println("[]]]]]]]]]]]]]]]"+selectedAnswers.get(position));
+
+
 
 
                 }
@@ -78,9 +95,14 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 
         b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
+            public void onCheckedChanged(CompoundButton compoundButton, boolean bi) {
+                b.setTag(position);
+                if(bi){
                     number.add("B");
+                    selectedAnswers.set(position ,"1");
+                    System.out.println("-=-=-=-=-=-position"+position);
+                    System.out.println("B[]]]]]]]]]]]]]]]"+selectedAnswers.get(position));
+
 
                 }
                 else {
@@ -92,8 +114,12 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                c.setTag(position);
                 if(b){
                     number.add("C");
+                    selectedAnswers.set(position ,"2");
+                    System.out.println("-=-=-=-=-=-position"+position);
+                    System.out.println("C[]]]]]]]]]]]]]]]"+selectedAnswers.get(position));
 
                 }
                 else {
@@ -105,8 +131,12 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         d.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                d.setTag(position);
                 if(b){
                     number.add("D");
+                    selectedAnswers.set(position ,"3");
+                    System.out.println("-=-=-=-=-=-position"+position);
+                    System.out.println("D[]]]]]]]]]]]]]]]"+selectedAnswers.get(position));
                 }
                 else {
                     number.remove(number.size()-number.size());
@@ -119,14 +149,36 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         b.setText(answer2);
         c.setText(answer3);
         d.setText(answer4);
+        My_method(position);
+
         return convertView;
 
+    }
+
+
+    private void My_method(int i) {
+
+        try{
+
+        for (int j=0;j<selectedAnswers.size();j++)
+        {
+            if (i == j) {
+
+                int a = Integer.parseInt( selectedAnswers.get( i ).trim() );
+                System.out.println("==================="+a);
+                ((RadioButton)radioGroup.getChildAt( a )).setChecked( true );
+
+            }
+        }}catch (Exception e){
+            Log.d("*******", e.toString());
+        }
     }
     public static void showAnswers(){
         for(i=0;i<Questions.questionList.size();i++){
             correct_answer.setText(Questions.correctAnswers.get(i));
         }
     }
+
 
 
 

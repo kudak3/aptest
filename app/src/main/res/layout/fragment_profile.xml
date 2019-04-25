@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Profile">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/profile_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Profile"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="100dip"
+        android:layout_height="150dip"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/profile_heading"
+        android:src="@drawable/profile" />
+    <LinearLayout
+        android:id="@+id/layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/image_view"
+        android:layout_below="@id/profile_heading"
+        android:layout_marginLeft="10sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_name"
+            android:layout_marginLeft="10sp"
+            android:textSize="12sp"
+            android:text=""
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_last_name"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp"
+            android:text=""
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_view"
+        android:layout_below="@id/layout_1"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_username"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp"
+            android:text=""
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_view"
+        android:layout_below="@id/layout_2"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account type:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_role"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp"
+            android:text=""
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_4"
+        android:orientation="vertical"
+        android:layout_below="@id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:text="Contact Details"
+            />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/layout_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:text="Email:"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_email"
+                android:layout_marginLeft="10dp"
+                android:textSize="12dp"
+                android:text=""
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/layout_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:text="Cell   :"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_phone"
+                android:layout_marginLeft="10dp"
+                android:textSize="12dp"
+                android:text=""
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/layout_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:text="Address:"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_address"
+                android:layout_marginLeft="10dp"
+                android:textSize="12dp"
+                android:text=""
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

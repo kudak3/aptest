@@ -48,6 +48,7 @@ public class Login extends Fragment {
    public static EditText userName,password;
    public static boolean isLogged=false;
    public static String role;
+   public static  String userId;
    private ProgressDialog progressDialog;
 
     public static OkHttpClient.Builder client = new OkHttpClient.Builder();
@@ -199,7 +200,7 @@ public class Login extends Fragment {
     }
     private void login() {
         progressDialog.setMessage("Logging in ...");
-//        showDialog();
+        showDialog();
 
 
         client.addInterceptor(new Interceptor(userName.getText().toString(), password.getText().toString()));
@@ -215,7 +216,9 @@ public class Login extends Fragment {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-
+                User user= response.body();
+                userId=user.getId();
+                System.out.println("================="+ userId);
 
                if("userExists".equals(response.headers().get("Responded"))){
 

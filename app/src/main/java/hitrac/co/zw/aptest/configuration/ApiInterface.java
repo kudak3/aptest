@@ -1,10 +1,13 @@
 package hitrac.co.zw.aptest.configuration;
 
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
+
 import java.util.List;
 
 import hitrac.co.zw.aptest.model.Exam;
 import hitrac.co.zw.aptest.model.Syllabus;
 import hitrac.co.zw.aptest.model.User;
+import hitrac.co.zw.aptest.model.UserDetails;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,6 +22,9 @@ public interface ApiInterface {
 
     @GET("user")
     Call<User> login(@Query("userName") String username, @Query("password") String password);
+
+    @GET("user/{id}")
+    Call<UserDetails>getUserById(@Path("id") String id);
 
     @FormUrlEncoded
     @POST("setQuestion")
