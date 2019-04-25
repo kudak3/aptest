@@ -1,6 +1,6 @@
 package hitrac.co.zw.aptest.configuration;
 
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
+
 
 import java.util.List;
 
@@ -52,4 +52,7 @@ public interface ApiInterface {
 
     @GET("syllabus")
     Call<List<Syllabus>> getAllSyllabus();
+
+    @POST("user")
+    Call<ResponseBody> signUpUser(@Body User user);
 }

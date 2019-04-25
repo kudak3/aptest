@@ -10,170 +10,239 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <!--<android.support.v7.widget.CardView-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_marginBottom="20dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--app:cardCornerRadius="10dp"-->
-        <!--app:cardElevation="3dp"-->
-        <!--app:cardPreventCornerOverlap="false"-->
-        <!--app:cardUseCompatPadding="true"-->
-        <!--android:layout_width="match_parent">-->
-
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/logo">
+           >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#0000FF"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
-                   android:layout_width="50dp"
+                    android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/logo"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/circle"
                     android:padding="10dp"
-                    android:layout_marginTop="20dp"
+                    android:src="@drawable/logo"
 
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="22sp"
-                    android:textColor="#fff"
-                    android:text="REGISTER"
-                    android:fontFamily="sans-serif-medium"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"/>
-
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="REGISTER"
+                    android:textColor="#fff"
+                    android:textSize="22sp" />
 
 
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                >
 
-                <EditText
-                    android:id="@+id/Name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="200dp"
-                    android:layout_marginRight="20dp"
-                    android:padding="@dimen/padding"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="Fullname"
-                    android:textColorHint="#ff0000"
-                    android:drawablePadding="12dp"
-                    android:drawableLeft="@drawable/ic_action_account"
 
-                    android:maxLines="1"/>
-                <EditText
-                    android:id="@+id/uName"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColorHint="@color/colorPrimary">
+
+                <EditText
+                    android:id="@+id/firstName"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
+                    android:drawableStart="@drawable/ic_action_account"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="First Name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding"
+                    android:layout_gravity="center_horizontal"
+
+                     />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
-                    android:padding="@dimen/padding"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="Username"
-                    android:textColorHint="#ff0000"
-                    android:drawablePadding="12dp"
-                    android:drawableLeft="@drawable/ic_action_account"
-
-                    android:maxLines="1"/>
+                    android:textColorHint="@color/colorPrimary">
                 <EditText
-                    android:id="@+id/uNam"
+                    android:id="@+id/lastname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="20dp"
-                    android:padding="@dimen/padding"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="password"
-                    android:textColorHint="#ff0000"
-                    android:drawablePadding="12dp"
-                    android:drawableLeft="@drawable/ic_action_account"
 
-                    android:maxLines="1"/>
+
+                    android:drawableLeft="@drawable/ic_action_surname"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Surname"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding"
+                    />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColorHint="@color/colorPrimary">
                 <EditText
                     android:id="@+id/userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginRight="20dp"
-                    android:padding="@dimen/padding"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="Phonenumber"
-                    android:textColorHint="#ff0000"
+
+                    android:drawableStart="@drawable/ic_action_username"
                     android:drawablePadding="12dp"
-                    android:drawableLeft="@drawable/ic_action_account"
+                    android:ems="10"
+                    android:hint="Username"
+                    android:inputType="textVisiblePassword"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding"
 
-                    android:maxLines="1"/>
+                    />
+                </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColorHint="@color/colorPrimary" >
                 <EditText
-                    android:id="@+id/userNme"
+                    android:id="@+id/passwd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginRight="20dp"
-                    android:padding="@dimen/padding"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="other Details"
-                    android:textColorHint="#ff0000"
+
+                    android:drawableStart="@drawable/ic_action_newpassword"
                     android:drawablePadding="12dp"
-                    android:drawableLeft="@drawable/ic_action_account"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding"
 
-                    android:maxLines="1"/>
+                    />
+                </android.support.design.widget.TextInputLayout>
 
-                <Button
-                    android:id="@+id/loginBtn"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColorHint="@color/colorPrimary">
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_action_email"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Email Address"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding"
+                    />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColorHint="@color/colorPrimary" >
+                <EditText
+                    android:id="@+id/phoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_action_contactphone"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Phone Number"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding"
+                    />
+                </android.support.design.widget.TextInputLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:ems="10">
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="I am a"
+                        android:id="@+id/selectRole"
+                        android:textSize="20sp"
+
+                        />
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_toEndOf="@+id/selectRole"
+                    android:id="@+id/role">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Teacher"
+                        android:textColor="@color/colorPrimary"
+                        android:id="@+id/teacher"
+                        />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Student"
+                        android:textColor="@color/colorPrimary"
+                        android:id="@+id/student"/>
+                </RadioGroup>
+                </RelativeLayout>
+                <Button
+                    android:id="@+id/signupBtn"
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
                     android:layout_marginTop="24dp"
+                    android:background="@drawable/login_button"
+                    android:clickable="true"
+                    android:padding="16dp"
                     android:text="Submit"
                     android:textAllCaps="false"
-                    android:padding="16dp"
-                    android:background="@drawable/login_button"
-                    android:textColor="#ff0000"
-                    android:clickable="true"
-                    style="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textSize="18sp"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
 
         </RelativeLayout>
-    <!--</android.support.v7.widget.CardView>-->
-    </ScrollView>
+        </ScrollView>
 
 </RelativeLayout>

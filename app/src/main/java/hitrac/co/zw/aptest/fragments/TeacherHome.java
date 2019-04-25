@@ -14,7 +14,7 @@ import static hitrac.co.zw.aptest.Dashboard.loginmenuItem;
 import static hitrac.co.zw.aptest.Dashboard.profile;
 import static hitrac.co.zw.aptest.Dashboard.results;
 import static hitrac.co.zw.aptest.Dashboard.toolbarName;
-import static hitrac.co.zw.aptest.fragments.Login.userName;
+import static hitrac.co.zw.aptest.fragments.Login.etUserName;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,7 +75,7 @@ public class TeacherHome extends Fragment {
         loginmenuItem.setTitle("Logout");
         results.setTitle("Set Test");
         profile.setTitle("My Tests");
-        toolbarName.setTitle(userName.getText().toString());
+        toolbarName.setTitle(etUserName.getText().toString());
         toolbarName.setVisible(true);
     return  rootView;
     }

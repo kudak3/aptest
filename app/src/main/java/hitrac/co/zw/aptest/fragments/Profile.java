@@ -90,7 +90,7 @@ public class Profile extends Fragment {
         profile_email=(TextView)rootView.findViewById(R.id.profile_email);
         profile_phone=(TextView)rootView.findViewById(R.id.profile_phone);
         profile_address=(TextView)rootView.findViewById(R.id.profile_address);
-        Login.client.addInterceptor(new Interceptor(Login.userName.getText().toString(),Login.password.getText().toString()));
+        Login.client.addInterceptor(new Interceptor(Login.etUserName.getText().toString(),Login.etPassword.getText().toString()));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(Login.client.build())

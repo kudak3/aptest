@@ -2,7 +2,6 @@ package hitrac.co.zw.aptest.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,9 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import hitrac.co.zw.aptest.Questions;
 import hitrac.co.zw.aptest.R;
 import hitrac.co.zw.aptest.configuration.ApiInterface;
 import hitrac.co.zw.aptest.configuration.Interceptor;
@@ -44,12 +44,13 @@ public class Login extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-   public Button loginBtn,signupBtn;
-   public static EditText userName,password;
+   public Button loginBtn;
+   public static EditText etUserName,etPassword;
    public static boolean isLogged=false;
    public static String role;
    public static  String userId;
    private ProgressDialog progressDialog;
+   private TextView tvSignup;
 
     public static OkHttpClient.Builder client = new OkHttpClient.Builder();
 
@@ -103,30 +104,32 @@ public class Login extends Fragment {
         View rootView= inflater.inflate(R.layout.fragment_login, container, false);
 
 
-        loginBtn=(Button)rootView.findViewById(R.id.loginBtn);
-        signupBtn=(Button)rootView.findViewById(R.id.signupBtn);
+        loginBtn = rootView.findViewById(R.id.loginBtn);
+        tvSignup = rootView.findViewById(R.id.signupBtn);
 
 
-        userName=(EditText)rootView.findViewById(R.id.userName);
-        password=(EditText)rootView.findViewById(R.id.password);
-        progressDialog= new ProgressDialog(getContext());
+        etUserName=(EditText)rootView.findViewById(R.id.userName);
+        etPassword=(EditText)rootView.findViewById(R.id.password);
+        progressDialog = new ProgressDialog(getContext(),ProgressDialog.THEME_HOLO_DARK);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = userName.getText().toString();
-                String passwd = password.getText().toString();
+                String username = etUserName.getText().toString();
+                String passwd = etPassword.getText().toString();
 
                 if(username.isEmpty() ){
-                    userName.setError("Enter username first");
+                    etUserName.setError("Enter username first");
                 }else  if(passwd.isEmpty()){
-                    password.setError("Enter password");
+                    etPassword.setError("Enter password");
                 }
                 else {
-//
+// progressDialog.setMessage("Authenticating...");
                     login();
 //                    Intent intent = new Intent(getActivity(), Questions.class);
-//                    startActivity(intent);
+//                    startActivity(intent); progressDialog.setMessage("Authenticating...");
 
 
 //                    Fragment fragment= new TeacherHome();
@@ -141,7 +144,7 @@ public class Login extends Fragment {
 
             }}
         });
-        signupBtn.setOnClickListener(new View.OnClickListener(){
+        tvSignup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Fragment fragment= new Signup();
@@ -199,11 +202,16 @@ public class Login extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
     private void login() {
-        progressDialog.setMessage("Logging in ...");
+        if (!validate()){
+            Toast.makeText(getContext(),"Please make sure that all fields are correctly filled",Toast.LENGTH_LONG).show();
+
+            return;
+        }
+        progressDialog.setMessage("Authenticating ...");
         showDialog();
 
 
-        client.addInterceptor(new Interceptor(userName.getText().toString(), password.getText().toString()));
+        client.addInterceptor(new Interceptor(etUserName.getText().toString(), etPassword.getText().toString()));
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -212,10 +220,12 @@ public class Login extends Fragment {
                 .build();
 
         ApiInterface requestService = retrofit.create(ApiInterface.class);
-        Call<User> call = requestService.login(userName.getText().toString(),password.getText().toString());
+        Call<User> call = requestService.login(etUserName.getText().toString(),etPassword.getText().toString());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                System.out.println("###############"+response);
+                Log.d(response.headers().get("Role").toString(),"heresss");
                 User user= response.body();
                 userId=user.getId();
                 System.out.println("================="+ userId);
@@ -259,6 +269,7 @@ public class Login extends Fragment {
             @Override
             public void onFailure(Call<User> call, Throwable throwable) {
                 Log.d("onFailure", throwable.toString());
+                System.out.println("========================");
 
                 Toast.makeText(getActivity(), "Login failed. Please check your internet connecion.", Toast.LENGTH_SHORT).show();
                 hideDialog();
@@ -267,6 +278,33 @@ public class Login extends Fragment {
             }
         });
     }
+    public boolean validate(){
+        boolean valid = true;
+
+        String userName = etUserName.getText().toString();
+        String password = etPassword.getText().toString();
+
+
+
+        if (userName.isEmpty() || userName.length() < 4){
+            etUserName.setError("should be at least 4 characters long");
+            valid = false;
+        }else {
+            etUserName.setError(null);
+        }
+
+        if (password.isEmpty() || password.length() < 4){
+            etPassword.setError("password should be at least 6 alphanumeric characters long");
+            valid = false;
+        }else {
+            etPassword.setError(null);
+        }
+
+
+        return valid;
+    }
+
+
     private void showDialog() {
         if (!progressDialog.isShowing())
             progressDialog.show();

@@ -90,17 +90,17 @@
             style="@style/Base.TextAppearance.AppCompat.Body1"
             android:textSize="18sp"/>
 
-        <Button
+        <TextView
             android:id="@+id/signupBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign up"
+            android:text="No account yet? Create one"
             style="@style/Base.TextAppearance.AppCompat.Body1"
             android:textColor="#ffffff"
             android:textAllCaps="false"
             android:textSize="18sp"
             android:layout_marginTop="16dp"
-            android:clickable="true"
+            android:gravity="center"
             android:padding="16dp"
             android:background="@drawable/signup_button"
 

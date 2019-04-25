@@ -36,8 +36,8 @@ import static hitrac.co.zw.aptest.QuestionListAdapter.a;
 import static hitrac.co.zw.aptest.QuestionAdapter.number;
 import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
 import static hitrac.co.zw.aptest.fragments.Login.client;
-import static hitrac.co.zw.aptest.fragments.Login.password;
-import static hitrac.co.zw.aptest.fragments.Login.userName;
+import static hitrac.co.zw.aptest.fragments.Login.etPassword;
+import static hitrac.co.zw.aptest.fragments.Login.etUserName;
 
 //import static hitrac.co.zw.aptest.QuestionListAdapter.showAnswers;
 
@@ -72,7 +72,7 @@ public class Questions extends AppCompatActivity {
             }
         }).start();
 
-        client.addInterceptor(new Interceptor(userName.getText().toString(),password.getText().toString()));
+        client.addInterceptor(new Interceptor(etUserName.getText().toString(),etPassword.getText().toString()));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client.build())
