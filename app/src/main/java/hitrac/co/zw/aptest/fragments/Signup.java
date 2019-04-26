@@ -204,13 +204,13 @@ public class Signup extends Fragment {
         }
 
         User user = new User(); progressDialog.setMessage("Authenticating...");
-        user.setFirstName(etFirstName.getText().toString());
-        user.setLastName(etLastName.getText().toString());
-        user.setUserName(etUserName.getText().toString());
-        user.setPassword(etPassword.getText().toString());
-        user.setEmail(etEmail.getText().toString());
-        user.setPhoneNumber(etPhoneNumber.getText().toString());
-        user.setRole(role);
+//        user.setFirstName(etFirstName.getText().toString());
+//        user.setLastName(etLastName.getText().toString());
+//        user.setUserName(etUserName.getText().toString());
+//        user.setPassword(etPassword.getText().toString());
+//        user.setEmail(etEmail.getText().toString());
+//        user.setPhoneNumber(etPhoneNumber.getText().toString());
+//        user.setRole(role);
 
         Call<ResponseBody> call = requestService.signUpUser(user);
 

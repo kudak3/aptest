@@ -4,6 +4,7 @@ public class Question {
 
     private String question;
     private String possibleAnswer1;
+    private boolean selected1;
     private String possibleAnswer2;
     private String possibleAnswer3;
     private String possibleAnswer4;
@@ -23,6 +24,14 @@ public class Question {
         this.correctAnswer = correctAnswer;
         this.id = id;
         this.questionNumber = questionNumber;
+    }
+
+    public boolean isSelected1() {
+        return selected1;
+    }
+
+    public void setSelected1(boolean selected1) {
+        this.selected1 = selected1;
     }
 
     public String getQuestion() {

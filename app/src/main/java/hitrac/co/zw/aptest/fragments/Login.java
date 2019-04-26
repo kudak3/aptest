@@ -47,6 +47,7 @@ public class Login extends Fragment {
    public static EditText etUserName,etPassword;
    public static boolean isLogged=false;
    public static String role;
+   public static  String userId;
    private ProgressDialog progressDialog;
    private TextView tvSignup;
 
@@ -188,45 +189,7 @@ public class Login extends Fragment {
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other     @GetMapping("/get-payment-type")
-    public List<PaymentType> paymentTypeList() {
-        return paymentTypeService.findAll().get();
-    }
-
-//    @PostMapping("store/image")
-//    public ResponseEntity<?> saveImage(@RequestParam("imageFile") byte[] image,@RequestParam(value = "productName",required = false) String productName) throws IOException {
-//
-//
-//
-//                MultipartFileUtil multipartFileUtil = new MultipartFileUtil(image,productName);
-//        if(!multipartFileUtil.isEmpty()){
-//            storageService.store(multipartFileUtil);
-//            HttpHeaders httpHeaders = new HttpHeaders();
-//            httpHeaders.add("multipart name", String.valueOf(multipartFileUtil.getSize()));
-//            return new ResponseEntity<>(multipartFileUtil,httpHeaders,HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
-
-    @CrossOrigin
-    @PostMapping("store/image")
-    public ResponseEntity<?> image(@RequestBody ProductImge imge) {
-        System.out.println(" 1------------------------" + imge.getImg());
-        try {
-
-            FileOutputStream stream;
-            File folder = new File(PRODUCT_IMAGE_PATH);
-            if (!folder.exists()) {
-                folder.mkdir();
-            }
-            Long id = imge.getId();
-            Product product = productService.get(id);
-            File file = new File(folder, id + ".png");
-            System.out.println("file.getPath() = " + file.getPath());
-            stream = new FileOutputStream(file);
-
-            BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imge.getImg()));
-            ImageIO.write(bufferedIfragments contained in that
+     * to the activity and potentially other fragments contained in that
      * activity.
      * <p>
      * See the Android Training lesson <a href=
@@ -262,12 +225,15 @@ public class Login extends Fragment {
             public void onResponse(Call<User> call, Response<User> response) {
                 System.out.println("###############"+response);
                 Log.d(response.headers().get("Role").toString(),"heresss");
+                User user= response.body();
+                userId=user.getId();
+                System.out.println("================="+ userId);
 
                if("userExists".equals(response.headers().get("Responded"))){
 
                    role=response.headers().get("Role");
 
-                   if("Student".equals(response.headers().get("Role"))){
+                   if("student".equals(response.headers().get("Role"))){
                    Fragment fragment= new Home();
                    FragmentManager fragmentManager= getFragmentManager();
                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();

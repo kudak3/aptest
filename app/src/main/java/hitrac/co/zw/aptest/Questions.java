@@ -3,12 +3,13 @@ package hitrac.co.zw.aptest;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static hitrac.co.zw.aptest.QuestionListAdapter.number;
+import static hitrac.co.zw.aptest.QuestionAdapter.ans;
+import static hitrac.co.zw.aptest.QuestionAdapter.ans1;
+import static hitrac.co.zw.aptest.QuestionAdapter.ans2;
+import static hitrac.co.zw.aptest.QuestionAdapter.ans3;
+import static hitrac.co.zw.aptest.QuestionAdapter.number;
 import static hitrac.co.zw.aptest.configuration.ApiClient.BASE_URL;
 import static hitrac.co.zw.aptest.fragments.Login.client;
 import static hitrac.co.zw.aptest.fragments.Login.etPassword;
@@ -38,7 +43,9 @@ public class Questions extends AppCompatActivity {
     public static ArrayList<Question> questionList;
     public ProgressDialog progressDialog;
     public Button submit_btn;
-    public static ArrayList<String> correctAnswers;
+    public static ArrayList<String> correctAnswers , mark ;
+   public RecyclerView recyclerView;
+   public static RecyclerView.Adapter adapter;
 
 
     @Override
@@ -97,23 +104,15 @@ public class Questions extends AppCompatActivity {
 
 
         questionList=new ArrayList<>();
-//      Question q1=new Question("1+5=","15","6","5","4","D","1",1);
-//      Question q2=new Question("1+5=","15","6","5","4","B","2",2);
-//      questionList.add(q1);
-//      questionList.add(q2);
-        ListView questions =(ListView)findViewById(R.id.questions);
+        recyclerView =(RecyclerView) findViewById(R.id.recyler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         correctAnswers= new ArrayList<>();
 
-
-
-
-
-
-
-
-
-        final QuestionListAdapter adapter= new QuestionListAdapter(this,R.layout.question_layout,questionList);
-        questions.setAdapter(adapter);
+        adapter= new QuestionAdapter(questionList,this);
+        recyclerView.setAdapter(adapter);
+//        final QuestionListAdapter adapter= new QuestionListAdapter(this,R.layout.question_layout,questionList);
+//        questions.setAdapter(adapter);
 
 
 
@@ -121,6 +120,8 @@ public class Questions extends AppCompatActivity {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
                 if (number.size() == 0) {
                     LayoutInflater inflater = getLayoutInflater();
@@ -140,19 +141,20 @@ public class Questions extends AppCompatActivity {
 
                 } else {
 
-                    System.out.println("............................."+number.size());
-                    int score = 0;
-                    ArrayList<String> mark = new ArrayList<>();
 
-//                    for (int i = 0; i < adapter.getCount(); i++) {
-//                        if (correctAnswers.get(i).equals(number.get(i))) {
-//                            mark.add("1");
-//                        }
-//
-//                    }
-//                    score = mark.size();
+                    int score = 0;
+
+                    score = mark.size();
 
 //                    showAnswers();
+                    for(int i=0;i<5;i++) {
+                        ans.setVisibility(View.VISIBLE);
+                        ans1.setVisibility(View.VISIBLE);
+                        ans2.setVisibility(View.VISIBLE);
+                        ans3.setVisibility(View.VISIBLE);
+                    }
+
+
 
 
                     Toast.makeText(getApplicationContext(), "You scored " + score + " out of " + questionList.size(), Toast.LENGTH_SHORT).show();

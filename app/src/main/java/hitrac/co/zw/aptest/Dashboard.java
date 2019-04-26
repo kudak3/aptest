@@ -18,6 +18,7 @@ import hitrac.co.zw.aptest.fragments.ExaminationNames;
 import hitrac.co.zw.aptest.fragments.Home;
 import hitrac.co.zw.aptest.fragments.Login;
 import hitrac.co.zw.aptest.fragments.MyTests;
+import hitrac.co.zw.aptest.fragments.Profile;
 import hitrac.co.zw.aptest.fragments.Results;
 import hitrac.co.zw.aptest.fragments.SetTest;
 import hitrac.co.zw.aptest.fragments.Signup;
@@ -29,6 +30,7 @@ import static hitrac.co.zw.aptest.fragments.Login.isLogged;
 public class Dashboard extends AppCompatActivity
 
         implements NavigationView.OnNavigationItemSelectedListener,
+        Profile.OnFragmentInteractionListener,
         Subjects.OnFragmentInteractionListener,
         TeacherHome.OnFragmentInteractionListener,
         Results.OnFragmentInteractionListener,
@@ -133,7 +135,7 @@ public class Dashboard extends AppCompatActivity
 //            }
 
         } else if (id == R.id.profile) {
-            fragment=new MyTests();
+            fragment=new Profile();
             FragmentManager fragmentManager=getSupportFragmentManager();
             FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container,fragment);

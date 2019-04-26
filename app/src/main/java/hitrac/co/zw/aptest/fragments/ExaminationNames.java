@@ -92,6 +92,7 @@ public class ExaminationNames extends Fragment {
                names=new ArrayList<>();
 
                        names.add(ex.get(0).getExamName());
+               names.add(ex.get(1).getExamName());
 
 
 
