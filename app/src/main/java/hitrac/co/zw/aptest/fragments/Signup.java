@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import hitrac.co.zw.aptest.R;
@@ -49,10 +50,11 @@ public class Signup extends Fragment {
     private String mParam2;
 
     private Button btnSubmit;
-    private EditText etFirstName,etLastName,etPassword,etPhoneNumber,etEmail,etUserName;
+    private EditText etFirstName,etLastName,etPassword,etPhoneNumber,etEmail,etUserName,etConfirmPassword;
     private RadioGroup rgRole;
     private RadioButton rbTeacher,rbStudent;
     private ProgressDialog progressDialog;
+    private TextView tvLogin;
 
 
 
@@ -102,8 +104,11 @@ public class Signup extends Fragment {
         etLastName = rootView.findViewById(R.id.lastname);
         etUserName = rootView.findViewById(R.id.userName);
         etPassword = rootView.findViewById(R.id.passwd);
+        etConfirmPassword = rootView.findViewById(R.id.confirmpasswd);
         etEmail = rootView.findViewById(R.id.email);
         etPhoneNumber = rootView.findViewById(R.id.phoneNumber);
+
+        tvLogin = rootView.findViewById(R.id.btnLogin);
 
         rgRole = rootView.findViewById(R.id.role);
         rbTeacher = rootView.findViewById(R.id.teacher);
@@ -119,6 +124,18 @@ public class Signup extends Fragment {
             @Override
             public void onClick(View view) {
                 signUp();
+            }
+        });
+
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    getFragmentManager().popBackStackImmediate();
+                }catch (NullPointerException e){
+                    System.out.println("=============="+e.getMessage());
+                }
+
             }
         });
 
@@ -204,13 +221,13 @@ public class Signup extends Fragment {
         }
 
         User user = new User(); progressDialog.setMessage("Authenticating...");
-//        user.setFirstName(etFirstName.getText().toString());
-//        user.setLastName(etLastName.getText().toString());
-//        user.setUserName(etUserName.getText().toString());
-//        user.setPassword(etPassword.getText().toString());
-//        user.setEmail(etEmail.getText().toString());
-//        user.setPhoneNumber(etPhoneNumber.getText().toString());
-//        user.setRole(role);
+        user.setFirstName(etFirstName.getText().toString());
+        user.setLastName(etLastName.getText().toString());
+        user.setUserName(etUserName.getText().toString());
+        user.setPassword(etPassword.getText().toString());
+        user.setEmail(etEmail.getText().toString());
+        user.setPhoneNumber(etPhoneNumber.getText().toString());
+        user.setRole(role);
 
         Call<ResponseBody> call = requestService.signUpUser(user);
 
@@ -240,6 +257,7 @@ public class Signup extends Fragment {
         String lastName = etLastName.getText().toString();
         String userName = etUserName.getText().toString();
         String password = etPassword.getText().toString();
+        String confirmpassword = etConfirmPassword.getText().toString();
         String email = etEmail.getText().toString();
         String phoneNumber = etPhoneNumber.getText().toString();
 
@@ -256,7 +274,7 @@ public class Signup extends Fragment {
             valid = false;
         }
 
-        if (userName.isEmpty() || userName.length() < 4){
+        if (userName.isEmpty() || userName.length() < 4 ){
             etUserName.setError("should be at least 4 characters long");
             valid = false;
         }else {
@@ -268,6 +286,14 @@ public class Signup extends Fragment {
             valid = false;
         }else {
             etPassword.setError(null);
+        }
+
+        if (!password.equals(confirmpassword)){
+            etConfirmPassword.setError("passwords do not match");
+            etPassword.setError("passwords do not match");
+        }else {
+            etPassword.setError(null);
+            etConfirmPassword.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){

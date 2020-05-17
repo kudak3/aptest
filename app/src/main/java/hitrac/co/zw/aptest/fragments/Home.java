@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import hitrac.co.zw.aptest.R;
 
@@ -29,10 +30,12 @@ public class Home extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ImageView syllabus1,syllabus2,syllabus3,settings;
+    public ImageView syllabus1,syllabus2,syllabus3;
     public static boolean isSyllabus1=false;
     public static boolean isIsSyllabus2=false;
     public static boolean isIsSyllabus3=false;
+
+    public LinearLayout llprofileLink;
 
 
     private OnFragmentInteractionListener mListener;
@@ -68,10 +71,12 @@ public class Home extends Fragment {
         syllabus1=rootView.findViewById(R.id.syllabus1);
         syllabus2=rootView.findViewById(R.id.syllabus2);
         syllabus3=rootView.findViewById(R.id.syllabus3);
-//        settings = rootView.findViewById(R.id.configure);
+
         loginmenuItem.setTitle("Logout");
         results.setTitle("My Results");
         profile.setTitle("My Profile");
+
+        llprofileLink = rootView.findViewById(R.id.profileLink);
 
         if(isLogged) {
             toolbarName.setTitle(etUserName.getText().toString());
@@ -92,7 +97,7 @@ public class Home extends Fragment {
                 FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container,fragment);
                 fragmentTransaction.commit();
-                fragmentTransaction.addToBackStack(null);
+
             }
         });
 
@@ -107,11 +112,10 @@ public class Home extends Fragment {
                 FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container,fragment);
                 fragmentTransaction.commit();
-                fragmentTransaction.addToBackStack(null);
-
             }
         });
-syllabus3.setOnClickListener(new View.OnClickListener() {
+
+        syllabus3.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {http://localhost:8105/swagger-ui.html#/user-controller
         isIsSyllabus3=true;
@@ -122,14 +126,30 @@ syllabus3.setOnClickListener(new View.OnClickListener() {
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragment);
         fragmentTransaction.commit();
-        fragmentTransaction.addToBackStack(null);
+
 
     }
-});
+    });
+
+        llprofileLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment profileFragment = new Profile();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,profileFragment);
+                fragmentTransaction.commit();
+
+            }
+        });
+
+
+
 
 
         return rootView;
     }
+
+
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

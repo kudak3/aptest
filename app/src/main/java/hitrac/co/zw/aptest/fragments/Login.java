@@ -116,32 +116,9 @@ public class Login extends Fragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = etUserName.getText().toString();
-                String passwd = etPassword.getText().toString();
-
-                if(username.isEmpty() ){
-                    etUserName.setError("Enter username first");
-                }else  if(passwd.isEmpty()){
-                    etPassword.setError("Enter password");
-                }
-                else {
-// progressDialog.setMessage("Authenticating...");
-                    login();
-//                    Intent intent = new Intent(getActivity(), Questions.class);
-//                    startActivity(intent); progressDialog.setMessage("Authenticating...");
-
-
-//                    Fragment fragment= new TeacherHome();
-//                    FragmentManager fragmentManager= getFragmentManager();
-//                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-//                    fragmentTransaction.replace(R.id.fragment_container,fragment);
-//                    fragmentTransaction.commit();
-//                    fragmentTransaction.addToBackStack(null);
-
-
-
-
-            }}
+                loginBtn.setEnabled(false);
+                           login();
+            }
         });
         tvSignup.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -203,9 +180,12 @@ public class Login extends Fragment {
     private void login() {
         if (!validate()){
             Toast.makeText(getContext(),"Please make sure that all fields are correctly filled",Toast.LENGTH_LONG).show();
+            loginBtn.setEnabled(true);
 
             return;
         }
+        loginBtn.setEnabled(false);
+
         progressDialog.setMessage("Authenticating ...");
         showDialog();
 
@@ -223,46 +203,47 @@ public class Login extends Fragment {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                System.out.println("###############"+response);
-                Log.d(response.headers().get("Role").toString(),"heresss");
-                User user= response.body();
-                userId=user.getId();
-                System.out.println("================="+ userId);
 
-               if("userExists".equals(response.headers().get("Responded"))){
+                if (!"userExists".equals(response.headers().get("Responded"))) {
 
-                   role=response.headers().get("Role");
+                    hideDialog();
 
-                   if("student".equals(response.headers().get("Role"))){
-                   Fragment fragment= new Home();
-                   FragmentManager fragmentManager= getFragmentManager();
-                   FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                   fragmentTransaction.replace(R.id.fragment_container,fragment);
-                   fragmentTransaction.commit();
+                    loginBtn.setEnabled(true);
 
+                    Toast.makeText(getActivity(), "Incorrect credentials! Please try again",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    User user = response.body();
+                    userId = user.getId();
 
-                   Toast.makeText(getActivity(), "login successfully!",
-                           Toast.LENGTH_LONG).show();
-                   hideDialog();
-               }
+                    role=response.headers().get("Role");
 
-               if("Teacher".equals(role)){
-                       Fragment fragment= new TeacherHome();
-                       FragmentManager fragmentManager= getFragmentManager();
-                       FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                       fragmentTransaction.replace(R.id.fragment_container,fragment);
-                       fragmentTransaction.commit();
+                    if("Student".equals(response.headers().get("Role"))){
+                    Fragment fragment= new Home();
+                    FragmentManager fragmentManager= getFragmentManager();
+                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container,fragment);
+                    fragmentTransaction.commit();
 
 
-                       Toast.makeText(getActivity(), "login successfully!",
-                               Toast.LENGTH_LONG).show();
-                       hideDialog();
-                   }
-               }
-               else{
-                   Toast.makeText(getActivity(), "Incorrect credentials! Please try again",
-                           Toast.LENGTH_LONG).show();
-               }
+                    Toast.makeText(getActivity(), "logged in successfully!",
+                            Toast.LENGTH_LONG).show();
+                        loginBtn.setEnabled(true);
+                    hideDialog();
+                   }else if("Teacher".equals(role)){
+                        Fragment fragment= new TeacherHome();
+                        FragmentManager fragmentManager= getFragmentManager();
+                        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container,fragment);
+                        fragmentTransaction.commit();
+
+
+                        Toast.makeText(getActivity(), "logged in successfully!",
+                                Toast.LENGTH_LONG).show();
+                        loginBtn.setEnabled(true);
+                        hideDialog();
+                    }
+                }
 
             }
             @Override
